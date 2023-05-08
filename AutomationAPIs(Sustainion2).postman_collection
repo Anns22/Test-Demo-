@@ -9,7 +9,7 @@
 	
 	"item": [
 		{
-			"name": "Electricity form",
+			"name": "Electricity consumptions",
 			"item": [
 				{
 					"name": "Create Electricity consumptions",
