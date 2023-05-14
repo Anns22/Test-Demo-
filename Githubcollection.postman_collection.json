@@ -1,0 +1,3126 @@
+{
+	"info": {
+		"_postman_id": "ce3775bf-3d39-4cdc-a912-87f219d4555c",
+		"name": "Githubcollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26515196",
+		"_collection_link": "https://winter-capsule-961230.postman.co/workspace/Sustainion-2~908ebb80-88a7-4100-bf8d-14ef0a41f67c/collection/26515196-ce3775bf-3d39-4cdc-a912-87f219d4555c?action=share&creator=26515196&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Consumptions",
+			"item": [
+				{
+					"name": "Electricity consumptions",
+					"item": [
+						{
+							"name": "Create Electricity consumptions",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const randomCost = Math.floor(Math.random() * 100) +1.1 ;\r",
+											"pm.globals.set(\"cost\",randomCost); \r",
+											"\r",
+											"const consumption = Math.floor(Math.random() * 1000)+1.3; \r",
+											"pm.globals.set(\"consumption\",consumption); \r",
+											"\r",
+											"const moment = require(\"moment\");\r",
+											"var startdate = moment().add(\"days\", _.random(-500,-3000));\r",
+											"pm.globals.set(\"start_date\", startdate.format(\"YYYY-MM-DD\"));\r",
+											"\r",
+											"const moment1 = require(\"moment\"); \r",
+											"var enddate = moment1().add(\"days\", _.random(-1,3000));\r",
+											"pm.globals.set(\"end_date\", enddate.format(\"YYYY-MM-DD\"));\r",
+											"\r",
+											"//const electricity_unit_id  = Math.floor(Math.random() * 3);\r",
+											"//pm.globals.set(\"electricity_unit_id\",electricity_unit_id);\r",
+											"\r",
+											"var electricity_unit_id = null;\r",
+											"\r",
+											"do {\r",
+											"  electricity_unit_id = Math.floor(Math.random() * 53) + 1;\r",
+											"} while (electricity_unit_id !== 1 && electricity_unit_id !== 2 && electricity_unit_id !== 53);\r",
+											"\r",
+											"pm.globals.set(\"electricity_unit_id\", electricity_unit_id.toString());\r",
+											"\r",
+											"const currency_id  = Math.floor(Math.random() * 21)+1;\r",
+											"pm.globals.set(\"currency_id\",currency_id); \r",
+											"\r",
+											"//const provider_id  = Math.floor(Math.random() * 26)+1;\r",
+											"//pm.globals.set(\"provider_id\",provider_id);  \r",
+											"\r",
+											"const remarks = Math.random().toString(36).substring(2, 12);\r",
+											"//console.log(\"random\", r);\r",
+											"pm.globals.set(\"remarks\",remarks); \r",
+											"\r",
+											"var ghg_protocol_scope = null;\r",
+											"\r",
+											"do {\r",
+											"  ghg_protocol_scope = Math.floor(Math.random() *3) + 1;\r",
+											"} while (ghg_protocol_scope !== 1 && ghg_protocol_scope !== 2 && ghg_protocol_scope !== 3);\r",
+											"\r",
+											"pm.globals.set(\"ghg_protocol_scope\", ghg_protocol_scope.toString()); \r",
+											"\r",
+											"var provider_id = null;\r",
+											"\r",
+											"do {\r",
+											"  provider_id = Math.floor(Math.random() *6) + 1;\r",
+											"} while (provider_id !== 1 && provider_id !== 2 && provider_id!== 6);\r",
+											"\r",
+											"pm.globals.set(\"provider_id\",provider_id.toString());\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"form_id\": 33,\r\n    \"subscriber_id\": 1,\r\n    \"data\": [\r\n        {\r\n            \"consumer_id\": 2,\r\n            \"start_date\": \"2023-01-24\",\r\n            \"end_date\": \"2023-06-15\",\r\n            \"ghg_protocol_scope\": {{ghg_protocol_scope}},\r\n            \"consumption\": {{consumption}},\r\n            \"electricity_unit_id\": {{electricity_unit_id}},\r\n            \"cost\": {{cost}},\r\n            \"currency_id\": {{currency_id}},\r\n            \"remarks\": \"{{remarks}}\",\r\n            \"provider_id\": {{provider_id}}\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/form_submit",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"form_submit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Electricity_consumptions",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"Electricity_id\", data.data[0]['id']); \r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/list/1/electricity_consumptions",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"list",
+										"1",
+										"electricity_consumptions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Electricity consumptions",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const randomCost = Math.floor(Math.random() * 100) +1.1 ;\r",
+											"pm.globals.set(\"cost\",randomCost); "
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"data\": [\r\n        {\r\n            \"id\": {{Electricity_id}},\r\n            \"consumer_id\":{{parent_location_id}},\r\n            \"start_date\": \"2023-01-24\",\r\n            \"end_date\": \"2023-06-15\",\r\n            \"ghg_protocol_scope\": {{ghg_protocol_scope}},\r\n            \"consumption\": {{consumption}},\r\n            \"electricity_unit_id\": {{electricity_unit_id}},\r\n            \"cost\": {{cost}},\r\n            \"currency_id\": {{currency_id}},\r\n            \"remarks\": \"{{remarks}}\",\r\n            \"provider_id\": {{provider_id}}\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/form_submit?form_id=33&subscriber_id=1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"form_submit"
+									],
+									"query": [
+										{
+											"key": "form_id",
+											"value": "33"
+										},
+										{
+											"key": "subscriber_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "antioxident_consumptions",
+					"item": [
+						{
+							"name": "Create antioxident_consumptions",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"\r",
+											"var weight_unit_id = null;\r",
+											"\r",
+											"do {\r",
+											"  weight_unit_id = Math.floor(Math.random() * 69) + 1;\r",
+											"} while (weight_unit_id !== 6 && weight_unit_id !== 7 && weight_unit_id !== 8,weight_unit_id !== 9 && weight_unit_id !== 10 && weight_unit_id !== 11,weight_unit_id !== 58 && weight_unit_id !== 65 && weight_unit_id !== 69);\r",
+											"\r",
+											"pm.globals.set(\"weight_unit_id\", weight_unit_id.toString());\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"form_id\": 2,\r\n    \"subscriber_id\": 1,\r\n    \"data\": [\r\n        {\r\n            \"consumer_id\": 1,\r\n            \"start_date\": \"2023-03-27\",\r\n            \"end_date\": \"2023-03-28\",\r\n            \"currency_id\": 10,\r\n            \"cost\": {{cost}},\r\n            \"consumption\": {{consumption}},\r\n            \"weight_unit_id\": {{weight_unit_id}},\r\n            \"remarks\": \"{{remarks}}\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/form_submit",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"form_submit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List antioxident_consumptions",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"antioxidants_id\", data.data[0]['id']); \r",
+											"\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/list/1/antioxidants_consumptions",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"list",
+										"1",
+										"antioxidants_consumptions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update antioxident_consumptions",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"data\":[\r\n        {\r\n          \"id\":{{antioxidants_id}},\r\n         \"consumer_id\" : 1,\r\n         \"start_date\" : \"2023-03-27\",\r\n        \"end_date\" : \"2023-03-28\",\r\n        \"currency_id\" : {{currency_id}},\r\n         \"cost\" : {{cost}},\r\n         \"consumption\" : {{consumption}},\r\n          \"weight_unit_id\" : {{weight_unit_id}},\r\n          \"remarks\" : \"{{remarks}}\"\r\n        }\r\n    ]\r\n}\r\n\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/form_submit?form_id=2&subscriber_id=1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"form_submit"
+									],
+									"query": [
+										{
+											"key": "form_id",
+											"value": "2"
+										},
+										{
+											"key": "subscriber_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Gas consumptions",
+					"item": [
+						{
+							"name": "create gas consumptions",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var gas_unit_id = null;\r",
+											"do {\r",
+											"\r",
+											"  gas_unit_id = Math.floor(Math.random() * 29) + 28;\r",
+											"\r",
+											"} while (gas_unit_id !== 28 && gas_unit_id !== 29);\r",
+											"\r",
+											"\r",
+											"pm.globals.set(\"gas_unit_id\",gas_unit_id.toString());\r",
+											"\r",
+											"var gas_type_id = null;\r",
+											"do {\r",
+											"\r",
+											" gas_type_id = Math.floor(Math.random() * 3) + 1;\r",
+											"\r",
+											"} while (gas_type_id !== 1 && gas_type_id!== 2 && gas_type_id !== 3 );\r",
+											"\r",
+											"\r",
+											"pm.globals.set(\"gas_type_id\", gas_type_id.toString());"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"form_id\" :3,\r\n    \"subscriber_id\" : 1,\r\n    \"data\":[\r\n        {\"consumer_id\" : 535,\r\n          \"start_date\" : \"2023-05-01\",\r\n          \"end_date\" : \"2023-08-30\",\r\n          \"ghg_protocol_scope\": {{ghg_protocol_scope}},\r\n          \"consumption\" : {{consumption}},\r\n          \"gas_unit_id\" : {{gas_unit_id}},\r\n          \"cost\" : {{cost}},\r\n          \"currency_id\" : {{currency_id}},\r\n          \"remarks\" : \"Testing\",\r\n          \"gas_type_id\" : {{gas_type_id}}\r\n         \r\n        }\r\n        \r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/form_submit",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"form_submit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List gas consumptions",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"gas consumptions_id\", data.data[0]['id']); \r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/list/1/gas_consumptions",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"list",
+										"1",
+										"gas_consumptions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update gas consumptions",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"form_id\" :3,\r\n    \"subscriber_id\" : 1,\r\n    \"data\":[\r\n        {\"id\" : {{gas consumptions_id}},\r\n        \"consumer_id\" : 535,\r\n          \"start_date\" : \"2016-05-01\",\r\n          \"end_date\" : \"2023-08-30\",\r\n          \"ghg_protocol_scope\": {{ghg_protocol_scope}},\r\n          \"consumption\" : {{consumption}},\r\n          \"gas_unit_id\" : {{gas_unit_id}},\r\n          \"cost\" : {{cost}},\r\n          \"currency_id\" : {{currency_id}},\r\n          \"remarks\" : \"Testing\",\r\n          \"gas_type_id\" : {{gas_type_id}}\r\n         \r\n        }\r\n        \r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/form_submit?form_id=3&subscriber_id=1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"form_submit"
+									],
+									"query": [
+										{
+											"key": "form_id",
+											"value": "3"
+										},
+										{
+											"key": "subscriber_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Steam consumptions",
+					"item": [
+						{
+							"name": "Create steam consumptions",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"form_id\": 9,\r\n    \"subscriber_id\": 1,\r\n    \"data\": [\r\n        {\r\n            \"consumer_id\": 714,\r\n            \"start_date\": \"2023-03-27\",\r\n            \"end_date\": \"2023-03-28\",\r\n            \"ghg_protocol_scope\": {{ghg_protocol_scope}},\r\n            \"currency_id\": 10,\r\n            \"cost\": {{cost}},\r\n            \"consumption\": {{consumption}},\r\n            \"energy_unit_id\": 17,\r\n            \"remarks\": \"Testing\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/form_submit",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"form_submit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List steam_consumptions",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"steam consumptions_id\", data.data[0]['id']); \r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/list/1/steam_consumptions",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"list",
+										"1",
+										"steam_consumptions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update steam consumptions",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"data\": [\r\n        {\r\n            \"id\": {{steam consumptions_id}},\r\n            \"consumer_id\": 714,\r\n            \"start_date\": \"2023-03-27\",\r\n            \"end_date\": \"2023-03-28\",\r\n            \"ghg_protocol_scope\": {{ghg_protocol_scope}},\r\n            \"currency_id\": 10,\r\n            \"cost\": {{cost}},\r\n            \"consumption\": {{consumption}},\r\n            \"energy_unit_id\": 17,\r\n            \"remarks\": \"Test\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/form_submit?form_id=9&subscriber_id=1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"form_submit"
+									],
+									"query": [
+										{
+											"key": "form_id",
+											"value": "9"
+										},
+										{
+											"key": "subscriber_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Detergent Consumptions",
+					"item": [
+						{
+							"name": "Create Detergent Consumptions",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var weight_unit_id = null;\r",
+											"\r",
+											"do {\r",
+											"\r",
+											" weight_unit_id = Math.floor(Math.random() * 69) + 6;\r",
+											"\r",
+											"} while (weight_unit_id !== 6 && weight_unit_id !== 7 && weight_unit_id !== 8 && weight_unit_id !== 9 && weight_unit_id !== 10 && weight_unit_id !== 11 && \r",
+											"weight_unit_id !== 58 && weight_unit_id !== 65 );\r",
+											"\r",
+											"pm.globals.set(\"weight_unit_id\", weight_unit_id.toString());\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"form_id\": 5,\r\n    \"subscriber_id\": 1,\r\n    \"data\": [\r\n        {\r\n            \"consumer_id\": 1,\r\n            \"start_date\": \"2023-03-27\",\r\n            \"end_date\": \"2023-03-28\",\r\n            \"currency_id\": {{currency_id}},\r\n            \"cost\": {{cost}},\r\n            \"consumption\": {{consumption}},\r\n            \"weight_unit_id\": {{weight_unit_id}},\r\n            \"remarks\": \"Testing\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/form_submit",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"form_submit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List Detergent Consumptions",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"detergent_consumptions_id\", data.data[0]['id']); \r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/list/1/detergent_consumptions",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"list",
+										"1",
+										"detergent_consumptions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Detergrent Consumptions",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"form_id\": 5,\r\n    \"subscriber_id\": 1,\r\n    \"data\": [\r\n        {\r\n            \"id\": {{detergent_consumptions_id}},\r\n            \"consumer_id\": 1,\r\n            \"start_date\": \"2023-03-27\",\r\n            \"end_date\": \"2023-03-28\",\r\n            \"currency_id\": {{currency_id}},\r\n            \"cost\": {{cost}},\r\n            \"consumption\": {{consumption}},\r\n            \"weight_unit_id\": {{weight_unit_id}},\r\n            \"remarks\": \"Testing\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/form_submit?form_id=5&subscriber_id=1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"form_submit"
+									],
+									"query": [
+										{
+											"key": "form_id",
+											"value": "5"
+										},
+										{
+											"key": "subscriber_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Refrigerant Leakage",
+					"item": [
+						{
+							"name": "Create Refrigerant Leakage",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"form_id\": 11,\r\n    \"subscriber_id\": 1,\r\n    \"data\": [\r\n        {\r\n            \"consumer_id\": {{parent_location_id}},\r\n            \"start_date\": \"2023-12-01\",\r\n            \"end_date\": \"2023-12-31\",\r\n            \"ghg_protocol_scope\": {{ghg_protocol_scope}},\r\n            \"currency_id\": {{currency_id}},\r\n            \"cost\": {{cost}},\r\n            \"consumption\": {{consumption}},\r\n            \"weight_unit_id\": 6,\r\n            \"refrigerant_type_id\": 19,\r\n            \"remarks\": \"Test\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/form_submit",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"form_submit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List Refrigerant Leakage",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"refrigerant_leakage_id\", data.data[0]['id']); \r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/list/1/refrigerant_consumptions",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"list",
+										"1",
+										"refrigerant_consumptions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Refrigerant Leakage",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"data\": [\r\n        {\r\n            \"id\": {{refrigerant_leakage_id}},\r\n            \"consumer_id\": 619,\r\n            \"start_date\": \"2023-12-01\",\r\n            \"end_date\": \"2023-12-31\",\r\n            \"ghg_protocol_scope\": {{ghg_protocol_scope}},\r\n            \"currency_id\": {{currency_id}},\r\n            \"cost\": {{cost}},\r\n            \"consumption\": {{consumption}},\r\n            \"weight_unit_id\": {{weight_unit_id}},\r\n            \"refrigerant_type_id\": 19,\r\n            \"remarks\": \"Test\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/form_submit?form_id=11&subscriber_id=1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"form_submit"
+									],
+									"query": [
+										{
+											"key": "form_id",
+											"value": "11"
+										},
+										{
+											"key": "subscriber_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Weighted fuel consumption",
+					"item": [
+						{
+							"name": "Create Weighted fuel consumption",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var fuel_type_id = null;\r",
+											"do {\r",
+											"\r",
+											" fuel_type_id = Math.floor(Math.random() * 9) + 1;\r",
+											"\r",
+											"} while (fuel_type_id !== 2 && fuel_type_id!== 9 );\r",
+											"\r",
+											"\r",
+											"pm.globals.set(\"fuel_type_id\", fuel_type_id.toString()); \r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"form_id\": 49,\r\n    \"subscriber_id\": 1,\r\n    \"data\": [\r\n        {\r\n            \"consumer_id\": 447,\r\n            \"start_date\": \"2014-03-27\",\r\n            \"end_date\": \"2023-03-28\",\r\n            \"ghg_protocol_scope\": {{ghg_protocol_scope}},\r\n            \"currency_id\": {{currency_id}},\r\n            \"cost\": {{cost}},\r\n            \"consumption\": {{consumption}},\r\n            \"weight_unit_id\": 9,\r\n            \"fuel_type_id\": {{fuel_type_id}},\r\n            \"type\": \"test\",\r\n            \"remarks\": \"Test\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/form_submit",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"form_submit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List weighted fuel consumption",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"weighted_fuel_consumptions_id\", data.data[1]['id']); \r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/list/1/weighted_fuel_consumptions",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"list",
+										"1",
+										"weighted_fuel_consumptions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update weighted fuel consumption",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"data\": [\r\n        {\r\n            \"id\": {{weighted_fuel_consumptions_id}},\r\n            \"consumer_id\": 447,\r\n            \"start_date\": \"2014-01-01\",\r\n            \"end_date\": \"2014-03-31\",\r\n            \"ghg_protocol_scope\": {{ghg_protocol_scope}},\r\n            \"currency_id\": {{currency_id}},\r\n            \"cost\": {{cost}},\r\n            \"consumption\": {{consumption}},\r\n            \"weight_unit_id\": 9,\r\n            \"fuel_type_id\": {{fuel_type_id}},\r\n            \"type\": \"WeightedFuelConsumption\",\r\n            \"remarks\": \"Test\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/form_submit?form_id=49&subscriber_id=1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"form_submit"
+									],
+									"query": [
+										{
+											"key": "form_id",
+											"value": "49"
+										},
+										{
+											"key": "subscriber_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Water recycled",
+					"item": [
+						{
+							"name": "Create water recycled",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.set(\"consumption\", Math.floor(Math.random() * 10000) + 1);\r",
+											"\r",
+											"const volumeUnitIds = [3, 4, 5];\r",
+											"const randomIndex = Math.floor(Math.random() * volumeUnitIds.length);\r",
+											"const randomVolumeUnitId = volumeUnitIds[randomIndex];\r",
+											"\r",
+											"pm.globals.set(\"volumeUnitId\", randomVolumeUnitId);\r",
+											"\r",
+											"\r",
+											"//pm.test(\"Remarks text value length is within expected range\", function() {\r",
+											"    //var response = pm.response.json();\r",
+											"    //pm.expect(response.remarks.length).to.be.within(1, 100);\r",
+											"//});\r",
+											"\r",
+											"//pm.environment.set(\"remarks\", \"This is a test remark\");\r",
+											"\r",
+											"function generateRandomString(length) {\r",
+											"    let result = '';\r",
+											"    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';\r",
+											"    for (let i = 0; i < length; i++) {\r",
+											"        result += characters.charAt(Math.floor(Math.random() * characters.length));\r",
+											"    }\r",
+											"    return result;\r",
+											"}\r",
+											"\r",
+											"pm.environment.set(\"remarks\", generateRandomString(10));\r",
+											"\r",
+											"pm.environment.set(\"type\", \"WaterRecycled\");\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"form_id\": 39,\r\n    \"subscriber_id\": 1,\r\n    \"data\": [\r\n        {\r\n            \"consumer_id\": 1,\r\n            \"start_date\": \"2023-06-09\",\r\n            \"end_date\": \"2023-09-08\",\r\n            \"consumption\": {{consumption}},\r\n            \"volume_unit_id\": {{volumeUnitId}},\r\n            \"type\": \"{{type}}\",\r\n            \"remarks\": \"{{remarks}}\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/form_submit",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"form_submit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List water recycled",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"water_recycled_id\", data.data[0]['id']); \r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/list/1/water_recycled",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"list",
+										"1",
+										"water_recycled"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update water recycled",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"form_id\": 39,\r\n    \"subscriber_id\": 1,\r\n    \"data\": [\r\n        {\r\n            \"id\": {{water_recycled_id}},\r\n            \"consumer_id\": 1,\r\n            \"start_date\": \"2023-03-27\",\r\n            \"end_date\": \"2023-03-28\",\r\n            \"consumption\": {{consumption}},\r\n            \"volume_unit_id\": {{volumeUnitId}},\r\n            \"type\": \"WaterRecycled\",\r\n            \"remarks\": \"Test\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/form_submit?form_id=39&subscriber_id=1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"form_submit"
+									],
+									"query": [
+										{
+											"key": "form_id",
+											"value": "39"
+										},
+										{
+											"key": "subscriber_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Lubricant Consumption",
+					"item": [
+						{
+							"name": "Create Lubricant consumption",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFubnNoZXJyeUBhZ2lsZWN5YmVyLmNvbSIsInVzZXJfaWQiOjE0MCwic3Vic2NyaWJlcl9pZCI6MiwiY3JlZGVudGlhbHMiOiJON0lDdk9QcXNyUWZVTUlEcWMxNlg3cDVLOUVLNTc2L0hTL2V3blF2QTFRQ3JqQ1I0ZnJad2lZYWNnVi9xbHV6UnM0bmdHOTFtUmlzMmlvSGhjQ0hsQUJvZkRWWGJmOEk4QnlCWFpCL01hOD0iLCJleHAiOjE2ODM4ODA0MTl9.ZdmbolAoQVS16dhiCAh7iFlu6IEne4pux_HrCwX6XSY",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"form_id\": 10,\r\n    \"subscriber_id\": 1,\r\n    \"data\": [\r\n        {\r\n            \"consumer_id\": {{parent_location_id}},\r\n            \"start_date\": \"2023-03-24\",\r\n            \"end_date\": \"2023-03-28\",\r\n            \"ghg_protocol_scope\": 3,\r\n            \"consumption\": {{consumption}},\r\n            \"volume_unit_id\": {{volume_unit_id}},\r\n            \"cost\": {{cost}},\r\n            \"currency_id\": {{currency_id}},\r\n            \"remarks\": \"{{remarks}}\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/form_submit",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"form_submit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List Lubricant Consumption",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"Lubricant_consumptions_id\", data.data[0]['id']); \r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/list/1/lubricant_consumptions",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"list",
+										"1",
+										"lubricant_consumptions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Lubricant Consumption",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const randomCost = Math.floor(Math.random() * 100) +1.1;\r",
+											"pm.globals.set(\"cost\",randomCost); \r",
+											"\r",
+											"const consumption = Math.floor(Math.random() * 1000)+1.3; \r",
+											"pm.globals.set(\"consumption\",consumption); \r",
+											"\r",
+											"const moment = require(\"moment\");\r",
+											"var startdate = moment().add(\"days\", _.random(-500,-3000));\r",
+											"pm.globals.set(\"start_date\", startdate.format(\"YYYY-MM-DD\"));\r",
+											"\r",
+											"const moment1 = require(\"moment\"); \r",
+											"var enddate = moment1().add(\"days\", _.random(-1,3000));\r",
+											"pm.globals.set(\"end_date\", enddate.format(\"YYYY-MM-DD\"));\r",
+											"\r",
+											"do {\r",
+											"  volume_unit_id = Math.floor(Math.random() * 53) + 1;\r",
+											"} while (volume_unit_id !== 3 && volume_unit_id !== 4 && volume_unit_id !== 60 && volume_unit_id !== 5 && volume_unit_id !== 61 && volume_unit_id !== 63 && volume_unit_id !== 68);\r",
+											"\r",
+											"const currency_id  = Math.floor(Math.random() * 21)+1;\r",
+											"pm.globals.set(\"currency_id\",currency_id); \r",
+											"\r",
+											"if (pm.response) {\r",
+											"  pm.test(\"Remarks text value length is within expected range\", function() {\r",
+											"      var response = pm.response.json();\r",
+											"      pm.expect(response.remarks.length).to.be.within(1, 100);\r",
+											"  });\r",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"data\": [\r\n        {\r\n            \"id\": {{Lubricant_consumptions_id}},\r\n            \"consumer_id\": {{parent_location_id}},\r\n            \"start_date\": \"2023-03-24\",\r\n            \"end_date\": \"2023-03-28\",\r\n            \"ghg_protocol_scope\": 3,\r\n            \"consumption\": {{consumption}},\r\n            \"volume_unit_id\": 4,\r\n            \"cost\": {{cost}},\r\n            \"currency_id\": {{currency_id}},\r\n            \"remarks\": \"{{remarks}}\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/form_submit?form_id=10&subscriber_id=1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"form_submit"
+									],
+									"query": [
+										{
+											"key": "form_id",
+											"value": "10"
+										},
+										{
+											"key": "subscriber_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Water Consumptions",
+					"item": [
+						{
+							"name": "Create water consumptions",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.sendRequest('https://staging.sustainion.tech/api/admin/form-structure/fields/1/water_consumptions', function (err, res) {\r",
+											"    if (err) {\r",
+											"        console.log(err);\r",
+											"    } else {\r",
+											"        try {\r",
+											"            var result = res.json();\r",
+											"            console.log(\"result\", result);\r",
+											"\r",
+											"            if (result.columns[0].source) {\r",
+											"                var totalrecords_of_location = result.columns[0].source.length;\r",
+											"                var randomNumber = Math.floor(Math.random() * totalrecords_of_location);\r",
+											"                var parent_location_id = result.columns[0].source[randomNumber].id;\r",
+											"                pm.globals.set('parent_location_id', parent_location_id);\r",
+											"            } else {\r",
+											"                console.log('Error: \"source\" property is undefined or null in the response.');\r",
+											"            }\r",
+											"        } catch (error) {\r",
+											"            console.log('Error:', error.message);\r",
+											"        }\r",
+											"    }\r",
+											"});\r",
+											"\r",
+											"const randomCost = Math.floor(Math.random() * 100) + 1.1;\r",
+											"pm.globals.set(\"cost\", randomCost);\r",
+											"\r",
+											"// Generate a random volume unit id from the given options\r",
+											"const volumeUnitOptions = [3, 4, 5, 60, 61, 63, 68];\r",
+											"const randomVolumeUnitIndex = Math.floor(Math.random() * volumeUnitOptions.length);\r",
+											"const randomVolumeUnitValue = volumeUnitOptions[randomVolumeUnitIndex];\r",
+											"pm.globals.set(\"volume_unit_id\", randomVolumeUnitValue);\r",
+											"\r",
+											"let currency_id = Math.floor(Math.random() * 20) + 1;\r",
+											"\r",
+											"if (currency_id >= 13) {\r",
+											"  currency_id += 1;\r",
+											"}\r",
+											"\r",
+											"pm.globals.set(\"currency_id\", currency_id);\r",
+											"\r",
+											"\r",
+											"const provider_id = Math.floor(Math.random() * 10)+1; \r",
+											"pm.globals.set(\"provider_id\",provider_id); \r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFubnNoZXJyeUBhZ2lsZWN5YmVyLmNvbSIsInVzZXJfaWQiOjE0MCwic3Vic2NyaWJlcl9pZCI6MiwiY3JlZGVudGlhbHMiOiJabk1xa1BIWEgzL1IyZHF6VDNrSkFTV3FNQlBNb3RLOFRCSXVvaGJVcmN5c1A0Zi8vOGFHSHZnVzg0UmZ5eVJBam5OcmNwcGhpc1dJYy8xQVpCclh5YTA5UmsveDBDcFVCanRkczVGV1pVOD0iLCJleHAiOjE2ODM4Nzc0Nzh9.FdcxmttKst4_kpGKHq55kYfDFLpoZuhZSDy7otQU0nQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"form_id\": 13,\r\n    \"subscriber_id\": 1,\r\n    \"data\": [\r\n        {\r\n            \"consumer_id\":{{parent_location_id}} ,\r\n            \"start_date\": \"2019-02-01\",\r\n            \"end_date\": \"2019-05-31\",\r\n            \"ghg_protocol_scope\": {{ghg_protocol_scope}},\r\n            \"provider_id\": {{provider_id}},\r\n            \"currency_id\": {{currency_id}},\r\n            \"cost\": {{cost}},\r\n            \"consumption\": {{consumption}},\r\n            \"volume_unit_id\": 68,\r\n            \"remarks\": \"Test\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/form_submit",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"form_submit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List water consumptions",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"Water_consumptions_id\", data.data[0]['id']); \r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/list/1/water_consumptions",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"list",
+										"1",
+										"water_consumptions"
+									],
+									"query": [
+										{
+											"key": "export",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update water consumptions",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"data\": [\r\n        {\r\n            \"id\": {{Water_consumptions_id}},\r\n           \"consumer_id\":{{parent_location_id}} ,\r\n            \"start_date\": \"2019-02-01\",\r\n            \"end_date\": \"2019-05-31\",\r\n            \"ghg_protocol_scope\": {{ghg_protocol_scope}},\r\n            \"provider_id\": {{provider_id}},\r\n            \"currency_id\": {{currency_id}},\r\n            \"cost\": {{cost}},\r\n            \"consumption\": {{consumption}},\r\n            \"volume_unit_id\": 68,\r\n            \"remarks\": \"Test\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/form_submit?subscriber_id=1&form_id=13",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"form_submit"
+									],
+									"query": [
+										{
+											"key": "subscriber_id",
+											"value": "1"
+										},
+										{
+											"key": "id",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "form_id",
+											"value": "13"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Volumetric fuel consumption",
+					"item": [
+						{
+							"name": "Create volumetric fuel consumtion",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// Send request to get location data and set parent_location_id global variable\r",
+											"pm.sendRequest('https://staging.sustainion.tech/api/admin/form-structure/fields/1/operational_risks', function (err, res) {\r",
+											"    if (err) {\r",
+											"        console.log(err);\r",
+											"    } else {\r",
+											"        var result = res.json();\r",
+											"        console.log(\"result\", result)\r",
+											"\r",
+											"        totalrecords_of_location = result.columns[0].source.length;\r",
+											"        pm.globals.set(\"source.length\", \"source.length\");\r",
+											"        var randomNumber = Math.floor(Math.random() * totalrecords_of_location);\r",
+											"        var parent_location_id = result.columns[0].source[randomNumber].id;\r",
+											"        pm.globals.set('parent_location_id', parent_location_id);\r",
+											"    }\r",
+											"});\r",
+											"\r",
+											"// Set random values for cost, consumption, currency_id, volume_unit_id, fuel_type_id, distance_unit_id, and distance\r",
+											"const randomCost = Math.floor(Math.random() * 100) + 1.1;\r",
+											"pm.globals.set(\"cost\", randomCost);\r",
+											"\r",
+											"const consumption = Math.floor(Math.random() * 1000) + 1.3;\r",
+											"pm.globals.set(\"consumption\", consumption);\r",
+											"\r",
+											"const vehicle_unit_id = Math.floor(Math.random() * 26) + 1;\r",
+											"pm.globals.set(\"vehicle_unit_id\", vehicle_unit_id);\r",
+											"\r",
+											"const currencyOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21];\r",
+											"const currency_id = currencyOptions[Math.floor(Math.random() * currencyOptions.length)];\r",
+											"pm.globals.set(\"currency_id\", currency_id);\r",
+											"\r",
+											"\r",
+											"// Generate a random distance unit id from the given options\r",
+											"const distanceUnitOptions = [38, 37, 51];\r",
+											"const randomDistanceUnitIndex = Math.floor(Math.random() * distanceUnitOptions.length);\r",
+											"const randomDistanceUnitValue = distanceUnitOptions[randomDistanceUnitIndex];\r",
+											"pm.globals.set(\"distance_unit_id\", randomDistanceUnitValue);\r",
+											"\r",
+											"// Generate a random volume unit id from the given options\r",
+											"const volumeUnitOptions = [3, 4, 5, 60, 61, 63, 68];\r",
+											"const randomVolumeUnitIndex = Math.floor(Math.random() * volumeUnitOptions.length);\r",
+											"const randomVolumeUnitValue = volumeUnitOptions[randomVolumeUnitIndex];\r",
+											"pm.globals.set(\"volume_unit_id\", randomVolumeUnitValue);\r",
+											"\r",
+											"function generateRandomString(length) {\r",
+											"  let result = '';\r",
+											"  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';\r",
+											"  const charactersLength = characters.length;\r",
+											"  for (let i = 0; i < length; i++) {\r",
+											"    result += characters.charAt(Math.floor(Math.random() * charactersLength));\r",
+											"  }\r",
+											"  return result;\r",
+											"}\r",
+											"\r",
+											"// Generate a random string with 10 alphabetic characters\r",
+											"const randomString = generateRandomString(10);\r",
+											"\r",
+											"pm.globals.set(\"type\", randomString);\r",
+											"\r",
+											"function generateRandomRemarks(length) {\r",
+											"  let result = '';\r",
+											"  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';\r",
+											"  const charactersLength = characters.length;\r",
+											"  for (let i = 0; i < length; i++) {\r",
+											"    result += characters.charAt(Math.floor(Math.random() * charactersLength));\r",
+											"  }\r",
+											"  return result;\r",
+											"}\r",
+											"\r",
+											"// Generate a random string with 20 alphanumeric characters for remarks\r",
+											"const randomRemarks = generateRandomRemarks(20);\r",
+											"pm.globals.set(\"remarks\", randomRemarks);\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"form_id\": 48,\r\n    \"subscriber_id\": 1,\r\n    \"data\": [\r\n        {\r\n            \"consumer_id\": {{parent_location_id}},\r\n            \"start_date\": \"2017-01-27\",\r\n            \"end_date\": \"2022-03-28\",\r\n            \"ghg_protocol_scope\": 1,\r\n            \"currency_id\":2,\r\n            \"cost\": {{cost}},\r\n            \"consumption\":1234,\r\n            \"volume_unit_id\":3,\r\n            \"fuel_type_id\": 16,\r\n            \"vehicle_type_id\": {{vehicle_type_id}},\r\n            \"distance_unit_id\":{{distance_unit_id}},\r\n            \"distance\":100,\r\n            \"type\": \"{{type}}\",\r\n            \"remarks\": \"{{remarks}}\" \r\n            }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/form_submit",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"form_submit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List volumetric fuel consumtion",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody);",
+											"postman.setEnvironmentVariable(\"Volumetric Fuel_id\", data.data[0]['id']); ",
+											"",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/list/1/volumetric_fuel_consumptions",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"list",
+										"1",
+										"volumetric_fuel_consumptions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update volumetric fuel consumtion",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"form_id\": 48,\r\n    \"subscriber_id\": 1,\r\n    \"data\": [\r\n        {\r\n            \"id\":1333,\r\n            \"consumer_id\": {{parent_location_id}},\r\n            \"start_date\": \"2017-01-27\",\r\n            \"end_date\": \"2022-03-28\",\r\n            \"ghg_protocol_scope\": 1,\r\n            \"currency_id\":2,\r\n            \"cost\": {{cost}},\r\n            \"consumption\":1234,\r\n            \"volume_unit_id\":3,\r\n            \"fuel_type_id\": 16,\r\n            \"vehicle_type_id\": {{vehicle_type_id}},\r\n            \"distance_unit_id\":{{distance_unit_id}},\r\n            \"distance\":100,\r\n            \"type\": \"{{type}}\",\r\n            \"remarks\": \"{{remarks}}\" \r\n            }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/form_submit?form_id=48&subscriber_id=1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"form_submit"
+									],
+									"query": [
+										{
+											"key": "form_id",
+											"value": "48"
+										},
+										{
+											"key": "subscriber_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Procured material consumptions",
+					"item": [
+						{
+							"name": "Create Procured material consumpations",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"form_id\": 12,\r\n    \"subscriber_id\": 1,\r\n    \"data\": [\r\n        {\r\n            \"start_date\": \"2023-01-01\",\r\n            \"end_date\": \"2023-01-31\",\r\n            \"consumer_id\": {{parent_location_id}},\r\n            \"ghg_protocol_scope\": {{ghg_protocol_scope}},\r\n            \"consumption\": {{consumption}},\r\n            \"material_type_id\": {{material_type_id}},\r\n            \"weight_unit_id\": {{weight_unit_id}},\r\n            \"weight_per_piece\":0,\r\n            \"nb_of_pieces\": 0,\r\n            \"cost\": {{cost}},\r\n            \"currency_id\": {{currency_id}},\r\n            \"remarks\": \"Spend-Based Testinggg\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/form_submit",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"form_submit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List procured material",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"Procured material_id\", data.data[0]['id']); \r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/list/1/material_consumptions",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"list",
+										"1",
+										"material_consumptions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update procured material",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"data\": [\r\n        {\r\n            \"id\": {{Procured material_id}},\r\n            \"start_date\": \"2017-01-01\",\r\n            \"end_date\": \"2022-01-31\",\r\n            \"consumer_id\": 618,\r\n            \"ghg_protocol_scope\": 1,\r\n            \"consumption\": 100.0,\r\n            \"material_type_id\": 25,\r\n            \"weight_unit_id\": 9,\r\n            \"weight_per_piece\": 0,\r\n            \"nb_of_pieces\": 0,\r\n            \"cost\": 100.0,\r\n            \"currency_id\": 1,\r\n            \"remarks\": \"Spend-Based Testinggg\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/form_submit?form_id=12&subscriber_id=1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"form_submit"
+									],
+									"query": [
+										{
+											"key": "form_id",
+											"value": "12"
+										},
+										{
+											"key": "subscriber_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "CSR & Environment",
+			"item": [
+				{
+					"name": "Create CSR & Environment",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//const improvement_category_id = [1, 2, 3];\r",
+									"//const randomIndex = Math.floor(Math.random() * improvement_category_id.length);\r",
+									"//const randomimprovement_category_id = improvement_category_id[randomIndex];\r",
+									"\r",
+									"function generateRandomString(length) {\r",
+									"    let result = '';\r",
+									"    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';\r",
+									"    for (let i = 0; i < length; i++) {\r",
+									"        result += characters.charAt(Math.floor(Math.random() * characters.length));\r",
+									"    }\r",
+									"    return result;\r",
+									"}\r",
+									"\r",
+									"pm.globals.set(\"remarks\", generateRandomString(10));\r",
+									"\r",
+									"pm.variables.set(\"amount\", Math.floor(Math.random() * 10000) + 1);\r",
+									"\r",
+									"pm.variables.set(\"man_days\", Math.floor(Math.random() * 10000) + 1);\r",
+									"\r",
+									"const currency_id  = Math.floor(Math.random() * 21)+1;\r",
+									"pm.globals.set(\"currency_id\",currency_id);\r",
+									"\r",
+									"pm.globals.set(\"title\", generateRandomString(10));\r",
+									"\r",
+									"{const categoryIds = [1, 2, 3];\r",
+									"const randomIndex = Math.floor(Math.random() * categoryIds.length);\r",
+									"const randomCategoryId = categoryIds[randomIndex];\r",
+									"\r",
+									"pm.globals.set(\"improvementCategoryId\", randomCategoryId);}\r",
+									"\r",
+									"const typeIds = [1, 2, 3, 5];\r",
+									"const randomIndex = Math.floor(Math.random() * typeIds.length);\r",
+									"const randomTypeId = typeIds[randomIndex];\r",
+									"\r",
+									"pm.globals.set(\"improvementTypeId\", randomTypeId);\r",
+									"\r",
+									"const stringLength = 10;\r",
+									"let strings = [];\r",
+									"\r",
+									"{for (let i = 0; i < 100; i++) {\r",
+									"  let randomString = \"\";\r",
+									"  const characters = \"abcdefghijklmnopqrstuvwxyz0123456789\";\r",
+									"  for (let j = 0; j < stringLength; j++) {\r",
+									"    randomString += characters.charAt(Math.floor(Math.random() * characters.length));\r",
+									"  }\r",
+									"  strings.push(randomString);\r",
+									"}\r",
+									"\r",
+									"pm.globals.set(\"descStrings\", strings);}\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"form_id\": 8,\r\n\"subscriber_id\": 1,\r\n\"data\": [\r\n{\"consumer_id\": {{parent_location_id}},\r\n\"title\": \"{{title}}\",\r\n\"improvement_category_id\": {{improvementCategoryId}},\r\n\"improvement_type_id\": {{improvementTypeId}},\r\n\"start_date\": \"2023-02-01\",\r\n\"end_date\": \"2023-02-28\",\r\n\"currency_id\": {{currency_id}},\r\n\"amount\": {{amount}},\r\n\"man_days\": {{man_days}},\r\n\"desc\": \"{{descStrings}}\",\r\n\"remarks\": \"{{remarks}}\"\r\n}\r\n]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/form_submit",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"form_submit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List  CSR & Environment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"CSR Environment_id\", data.data[0]['id']); \r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/list/1/improvements",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"list",
+								"1",
+								"improvements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update CSR & Environment",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//const improvement_category_id = [1, 2, 3];\r",
+									"//const randomIndex = Math.floor(Math.random() * improvement_category_id.length);\r",
+									"//const randomimprovement_category_id = improvement_category_id[randomIndex];\r",
+									"\r",
+									"function generateRandomString(length) {\r",
+									"    let result = '';\r",
+									"    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';\r",
+									"    for (let i = 0; i < length; i++) {\r",
+									"        result += characters.charAt(Math.floor(Math.random() * characters.length));\r",
+									"    }\r",
+									"    return result;\r",
+									"}\r",
+									"\r",
+									"pm.environment.set(\"remarks\", generateRandomString(10));\r",
+									"\r",
+									"pm.variables.set(\"amount\", Math.floor(Math.random() * 10000) + 1);\r",
+									"\r",
+									"pm.variables.set(\"man_days\", Math.floor(Math.random() * 10000) + 1);\r",
+									"\r",
+									"const currency_id  = Math.floor(Math.random() * 21)+1;\r",
+									"pm.globals.set(\"currency_id\",currency_id);\r",
+									"\r",
+									"pm.environment.set(\"title\", generateRandomString(10));\r",
+									"\r",
+									"{const categoryIds = [1, 2, 3];\r",
+									"const randomIndex = Math.floor(Math.random() * categoryIds.length);\r",
+									"const randomCategoryId = categoryIds[randomIndex];\r",
+									"\r",
+									"pm.environment.set(\"improvementCategoryId\", randomCategoryId);}\r",
+									"\r",
+									"const typeIds = [1, 2, 3, 5];\r",
+									"const randomIndex = Math.floor(Math.random() * typeIds.length);\r",
+									"const randomTypeId = typeIds[randomIndex];\r",
+									"\r",
+									"pm.environment.set(\"improvementTypeId\", randomTypeId);\r",
+									"\r",
+									"const stringLength = 10;\r",
+									"let strings = [];\r",
+									"\r",
+									"{for (let i = 0; i < 100; i++) {\r",
+									"  let randomString = \"\";\r",
+									"  const characters = \"abcdefghijklmnopqrstuvwxyz0123456789\";\r",
+									"  for (let j = 0; j < stringLength; j++) {\r",
+									"    randomString += characters.charAt(Math.floor(Math.random() * characters.length));\r",
+									"  }\r",
+									"  strings.push(randomString);\r",
+									"}\r",
+									"\r",
+									"pm.environment.set(\"descStrings\", strings);}\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"data\": [\r\n{\"id\" : {{CSR Environment_id}},\r\n\"consumer_id\": {{parent_location_id}},\r\n\"title\": \"{{title}}\",\r\n\"improvement_category_id\": {{improvementCategoryId}},\r\n\"improvement_type_id\": {{improvementTypeId}},\r\n\"start_date\": \"2023-02-01\",\r\n\"end_date\": \"2023-02-28\",\r\n\"currency_id\": {{currency_id}},\r\n\"amount\": {{amount}},\r\n\"man_days\": {{man_days}},\r\n\"desc\": \"{{descStrings}}\",\r\n\"remarks\": \"{{remarks}}\"\r\n}\r\n]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/form_submit?form_id=8&subscriber_id=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"form_submit"
+							],
+							"query": [
+								{
+									"key": "form_id",
+									"value": "8"
+								},
+								{
+									"key": "subscriber_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Supply chain risks",
+			"item": [
+				{
+					"name": "Create Supply chain risks",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const reportCategoryOptions = [2, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21];\r",
+									"const reportCategoryRandomIndex = Math.floor(Math.random() * reportCategoryOptions.length);\r",
+									"const reportCategoryRandomValue = reportCategoryOptions[reportCategoryRandomIndex];\r",
+									"pm.globals.set(\"report_catergory_id\", reportCategoryRandomValue);\r",
+									"\r",
+									"const reportTypeOptions = [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18];\r",
+									"const reportTypeRandomIndex = Math.floor(Math.random() * reportTypeOptions.length);\r",
+									"const reportTypeRandomValue = reportTypeOptions[reportTypeRandomIndex];\r",
+									"pm.globals.set(\"report_type_id\", reportTypeRandomValue);\r",
+									"\r",
+									"\r",
+									"const supply_chain_risk_status_id  = Math.floor (Math.random()* 7)+1;\r",
+									"pm.globals.set(\"supply_chain_risk_status_id\", supply_chain_risk_status_id);\r",
+									"\r",
+									"pm.sendRequest('https://staging.sustainion.tech/api/admin/form-structure/fields/1/supply_chain_risks', function (err,res){\r",
+									"    if(err) {\r",
+									"        console.log(err);\r",
+									"    } else { \r",
+									"        var result  = res.json();\r",
+									"console.log(\"result\", result)\r",
+									"\r",
+									"totalrecords_of_location = result.columns[0].source.length;\r",
+									"pm.globals.set(\"source.length\", \"source.length\");\r",
+									"var randomNumber = Math.floor(Math.random() * totalrecords_of_location);\r",
+									"var parent_location_id = result.columns[0].source[randomNumber].id;\r",
+									"pm.globals.set('parent_location_id', parent_location_id);\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"{\r",
+									"\r",
+									"function generateReferenceNumber() {\r",
+									"\r",
+									"    const timestamp = new Date().getTime();\r",
+									"\r",
+									"    const number = Math.floor(Math.random() * 10000);\r",
+									"\r",
+									"    const formattedNumber = (\"0000\" + number).slice(-4);\r",
+									"\r",
+									"    return `\"RKSM${formattedNumber}\"`;\r",
+									"\r",
+									"}\r",
+									"\r",
+									"\r",
+									"pm.environment.set(\"referenceNumber\", generateReferenceNumber());\r",
+									"\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function (){",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"form_id\": 21,\r\n    \"subscriber_id\": 1,\r\n    \"data\": [\r\n        {\r\n            \"consumer_id\": {{parent_location_id}},\r\n            \"report_category_id\": {{report_catergory_id}},\r\n            \"report_type_id\": {{report_type_id}},\r\n            \"report_date\": \"2022-01-01\",\r\n            \"reference_no\": {{referenceNumber}},\r\n            \"description\": \"test\",\r\n            \"critical_concern\": \"No\",\r\n            \"supply_chain_risk_status_id\": {{supply_chain_risk_status_id}},\r\n            \"measure_taken_at\": \"2022-01-01\",\r\n            \"measure_taken\": \"Test\",\r\n            \"reviewed_at\": \"2022-01-01\",\r\n            \"result_review\": \"Test\",\r\n            \"remarks\": \"Test\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/form_submit",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"form_submit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List supply chain risks",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"Supplychainrisks_id\", data.data[0]['id']); \r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/list/1/supply_chain_risks",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"list",
+								"1",
+								"supply_chain_risks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update supply chain risks",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\": [\r\n        {\r\n            \"id\": {{Supplychainrisks_id}},\r\n            \"consumer_id\": {{parent_location_id}},\r\n            \"report_category_id\": {{report_catergory_id}},\r\n            \"report_type_id\": {{report_type_id}},\r\n            \"report_date\": \"2018-01-01\",\r\n            \"reference_no\": {{referenceNumber}},\r\n            \"description\": \"update report\",\r\n            \"critical_concern\": \"Yes\",\r\n            \"supply_chain_risk_status_id\":{{supply_chain_risk_status_id}},\r\n            \"measure_taken_at\": \"2022-01-01\",\r\n            \"measure_taken\": \"Test\",\r\n            \"reviewed_at\": \"2022-01-01\",\r\n            \"result_review\": \"Test\",\r\n            \"remarks\": \"Test\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/form_submit?form_id=21&subscriber_id=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"form_submit"
+							],
+							"query": [
+								{
+									"key": "form_id",
+									"value": "21"
+								},
+								{
+									"key": "subscriber_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Operational risks",
+			"item": [
+				{
+					"name": "Create Operational risks",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Function to generate a random string of specified length\r",
+									"function generateRandomString(length) {\r",
+									"    let result = '';\r",
+									"    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';\r",
+									"    for (let i = 0; i < length; i++) {\r",
+									"        result += characters.charAt(Math.floor(Math.random() * characters.length));\r",
+									"    }\r",
+									"    return result;\r",
+									"}\r",
+									"\r",
+									"// Set globals for issue category, issue type, and operational risk status\r",
+									"const issueCategoryOptions = [4, 5, 6, 7, 8, 9, 10, 11, 12, 13];\r",
+									"const issueCategoryRandomIndex = Math.floor(Math.random() * issueCategoryOptions.length);\r",
+									"const issueCategoryRandomValue = issueCategoryOptions[issueCategoryRandomIndex];\r",
+									"pm.globals.set(\"issue_category_id\", issueCategoryRandomValue);\r",
+									"\r",
+									"const issueTypeOptions = [2,3,4,7,8,9];\r",
+									"const issueTypeRandomIndex = Math.floor(Math.random() * issueTypeOptions.length);\r",
+									"const issueTypeRandomValue = issueTypeOptions[issueTypeRandomIndex];\r",
+									"pm.globals.set(\"issue_type_id\", issueTypeRandomValue);\r",
+									"\r",
+									"\r",
+									"const operationalRiskStatusOptions = [2, 3, 4, 5, 6, 7, 8, 9, 10];\r",
+									"const operationalRiskStatusRandomIndex = Math.floor(Math.random() * operationalRiskStatusOptions.length);\r",
+									"const operationalRiskStatusRandomValue = operationalRiskStatusOptions[operationalRiskStatusRandomIndex];\r",
+									"pm.globals.set(\"operational_risk_status_id\", operationalRiskStatusRandomValue);\r",
+									"\r",
+									"\r",
+									"// Send request to get location data and set parent_location_id global variable\r",
+									"pm.sendRequest('https://staging.sustainion.tech/api/admin/form-structure/fields/1/operational_risks', function (err, res) {\r",
+									"    if (err) {\r",
+									"        console.log(err);\r",
+									"    } else {\r",
+									"        var result = res.json();\r",
+									"        console.log(\"result\", result)\r",
+									"\r",
+									"        totalrecords_of_location = result.columns[0].source.length;\r",
+									"        pm.globals.set(\"source.length\", \"source.length\");\r",
+									"        var randomNumber = Math.floor(Math.random() * totalrecords_of_location);\r",
+									"        var parent_location_id = result.columns[0].source[randomNumber].id;\r",
+									"        pm.globals.set('parent_location_id', parent_location_id);\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"// Function to generate a reference number with a random string of 4 characters and a random 4-digit number\r",
+									"function generateReferenceNumber() {\r",
+									"    const timestamp = new Date().getTime();\r",
+									"    const number = Math.floor(Math.random() * 10000);\r",
+									"    const formattedNumber = (\"0000\" + number).slice(-4);\r",
+									"    return `\"APKH${formattedNumber}\"`;\r",
+									"}\r",
+									"\r",
+									"// Set environment variable for reference number\r",
+									"pm.environment.set(\"referenceNumber\", generateReferenceNumber());\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"form_id\": 14,\r\n    \"subscriber_id\": 1,\r\n    \"data\": [\r\n        {\r\n            \"consumer_id\": {{parent_location_id}},\r\n            \"issue_category_id\":{{issue_category_id}},\r\n            \"issue_type_id\": {{issue_type_id}},\r\n            \"report_date\": \"2018-01-01\",\r\n            \"reference_no\": {{referenceNumber}},\r\n            \"description\": null,\r\n            \"critical_concern\": 2,\r\n            \"operational_risk_status_id\":{{operational_risk_status_id}},\r\n            \"measure_taken_at\": \"2018-01-01\",\r\n            \"measure_taken\": \"Test\",\r\n            \"reviewed_at\": \"2018-01-01\",\r\n            \"result_review\": \"Test\",\r\n            \"remarks\": \"Test\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/form_submit",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"form_submit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Operational risks",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"Operational Risks_id\", data.data[0]['id']); \r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/list/1/operational_risks",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"list",
+								"1",
+								"operational_risks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Operational risks",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\": [\r\n        {\r\n            \"id\": {{Operational Risks_id}},\r\n            \"consumer_id\": {{parent_location_id}},\r\n            \"issue_category_id\": {{issue_category_id}},\r\n            \"issue_type_id\": {{issue_type_id}},\r\n            \"report_date\": \"2018-01-01\",\r\n            \"reference_no\": {{referenceNumber}},\r\n            \"description\": null,\r\n            \"critical_concern\": 1,\r\n            \"operational_risk_status_id\": {{operational_risk_status_id}},\r\n            \"measure_taken_at\": \"2018-01-01\",\r\n            \"measure_taken\": \"Test\",\r\n            \"reviewed_at\": \"2018-01-01\",\r\n            \"result_review\": \"Test\",\r\n            \"remarks\": \"Test\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/form_submit?form_id=14&subscriber_id=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"form_submit"
+							],
+							"query": [
+								{
+									"key": "form_id",
+									"value": "14"
+								},
+								{
+									"key": "subscriber_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "NCR & Issue logs",
+			"item": [
+				{
+					"name": "Create NCR & Issue Logs",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const stringLength = 10;\r",
+									"let strings = [];\r",
+									"\r",
+									"{for (let i = 0; i < 100; i++) {\r",
+									"  let randomString = \"\";\r",
+									"  const characters = \"abcdefghijklmnopqrstuvwxyz0123456789\";\r",
+									"  for (let j = 0; j < stringLength; j++) {\r",
+									"    randomString += characters.charAt(Math.floor(Math.random() * characters.length));\r",
+									"  }\r",
+									"  strings.push(randomString);\r",
+									"}\r",
+									"\r",
+									"pm.environment.set(\"descStrings\", strings);}\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"form_id\": 20,\r\n    \"subscriber_id\": 1,\r\n    \"data\": [\r\n        {\r\n            \"consumer_id\": 1,\r\n            \"raised_at\": \"2022-01-01\",\r\n            \"num\": 112,\r\n            \"raised_by\": \"\",\r\n            \"desc\": \"{{descStrings}}\",\r\n            \"remarks\": \"test\",\r\n            \"actioned_by\": \"testuser\",\r\n            \"completed_at\": \"2022-01-01\",\r\n            \"type\": \"Ncr\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/form_submit",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"form_submit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List NCR & Issue Logs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/list/1/log_bases",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"list",
+								"1",
+								"log_bases"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"data\": [\r\n{\r\n\"id\":13,\r\n\"consumer_id\": 1,\r\n\"raised_at\": \"2022-01-01\",\r\n\"num\": 2,\r\n\"raised_by\":\"david\",\r\n\"desc\": \"test\",\r\n\"remarks\": \"test\",\r\n\"actioned_by\": \"wick\",\r\n\"completed_at\": \"2022-01-01\",\r\n\"type\":\"IssueLog\"\r\n}\r\n]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/form_submit?subscriber_id=1&form_id=20",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"form_submit"
+							],
+							"query": [
+								{
+									"key": "subscriber_id",
+									"value": "1"
+								},
+								{
+									"key": "form_id",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "External Audit",
+			"item": [
+				{
+					"name": "Create External Audit",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"form_id\": 25,\r\n    \"subscriber_id\": 1,\r\n    \"data\": [\r\n        {\r\n            \"type\":\"ExternalAudit\",\r\n            \"consumer_id\": {{parent_location_id}},\r\n            \"conducted_at\":\"2018-01-01\",\r\n            \"remarks\": null\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/form_submit",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"form_submit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List External Audit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"ExternalAudit_id\", data.data[0]['id']); \r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/list/1/audits",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"list",
+								"1",
+								"audits"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update External Audit",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"form_id\": 25,\r\n    \"subscriber_id\": 1,\r\n    \"data\": [\r\n        {\r\n            \"id\":{{Audit_id}},\r\n            \"type\":\"ExternalAudit\",\r\n            \"consumer_id\": {{parent_location_id}},\r\n            \"conducted_at\":\"2018-01-01\",\r\n            \"remarks\": \"{{remarks}}\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/form_submit?subscriber_id=1&form_id=25",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"form_submit"
+							],
+							"query": [
+								{
+									"key": "subscriber_id",
+									"value": "1"
+								},
+								{
+									"key": "form_id",
+									"value": "25"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Audits",
+			"item": [
+				{
+					"name": "Create Audits",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"form_id\": 16,\r\n    \"subscriber_id\": 1,\r\n    \"data\": [\r\n        {\r\n            \"consumer_id\": {{parent_location_id}},\r\n            \"conducted_at\": \"2023-01-01\",\r\n            \"remarks\": \"{{remarks}}\",\r\n            \"type\": \"InternalAudit\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/form_submit",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"form_submit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Audits",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"Audit_id\", data.data[0]['id']); \r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/list/1/audits",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"list",
+								"1",
+								"audits"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateAudits",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\": [\r\n        {\r\n            \"id\":{{Audit_id}},\r\n            \"consumer_id\": {{parent_location_id}},\r\n            \"conducted_at\": \"2022-01-01\",\r\n            \"remarks\": \"{{remarks}}\",\r\n            \"type\":\"InternalAudit\"\r\n        \r\n        }\r\n    ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/form_submit?form_id=16&subscriber_id=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"form_submit"
+							],
+							"query": [
+								{
+									"key": "form_id",
+									"value": "16"
+								},
+								{
+									"key": "subscriber_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vehicle tracking",
+			"item": [
+				{
+					"name": "Create vehicle tracking",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.variables.set(\"cost\", Math.floor(Math.random() * 10000) + 1);\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"const currency_id  = Math.floor(Math.random() * 21)+1;\r",
+									"pm.globals.set(\"currency_id\",currency_id); \r",
+									"\r",
+									"const nb_vehicles  = Math.floor(Math.random() * 21)+1;\r",
+									"pm.globals.set(\"nb_vehicles\",nb_vehicles);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n\"form_id\" :18, \r\n\"subscriber_id\" : 1, \r\n\"data\":[ \r\n{ \r\n\"consumer_id\": {{parent_location_id}}, \r\n\"start_date\": \"2022-01-01\", \r\n\"end_date\": \"2022-02-28\", \r\n\"tracking_category_id\": 1, \r\n\"tracking_type_id\": 1, \r\n\"engine_type_id\": null, \r\n\"currency_id\": {{currency_id}}, \r\n\"cost\": {{cost}}, \r\n\"nb_vehicles\": {{nb_vehicles}},\r\n\"remarks\": \" testing\" \r\n\r\n\r\n} \r\n\r\n] \r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/form_submit",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"form_submit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List vehicle tracking",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"Vehicle_tracking_id\", data.data[0]['id']); \r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/list/1/vehicle_trackings",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"list",
+								"1",
+								"vehicle_trackings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update vehicle tracking",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n\"form_id\" :18, \r\n\"subscriber_id\" : 1, \r\n\"data\":[ \r\n\r\n{ \"id\" : 100, \r\n\"consumer_id\": {{parent_location_id}}, \r\n\"start_date\": \"2022-01-01\", \r\n\"end_date\": \"2022-02-28\", \r\n\"tracking_category_id\":1, \r\n\"tracking_type_id\": 1, \r\n\"engine_type_id\": null, \r\n\"currency_id\":{{currency_id}}, \r\n\"cost\": {{cost}}, \r\n\"nb_vehicles\":{{nb_vehicles}}, \r\n\"remarks\": \"Test\" \r\n\r\n} \r\n\r\n] \r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/form_submit?form_id=18&subscriber_id=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"form_submit"
+							],
+							"query": [
+								{
+									"key": "form_id",
+									"value": "18"
+								},
+								{
+									"key": "subscriber_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Commute",
+			"item": [
+				{
+					"name": "Create Commute",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"form_id\": 6,\r\n    \"subscriber_id\": 1,\r\n    \"data\": [\r\n        {\r\n            \"consumer_id\": {{parent_location_id}},\r\n            \"ghg_protocol_scope\": {{ghg_protocol_scope}},\r\n            \"start_date\": \"2017-01-01\",\r\n            \"end_date\": \"2021-01-31\",\r\n            \"nb_pax\": 100,\r\n            \"consumption\": {{consumption}},\r\n            \"distance_unit_id\": {{distance_unit_id}},\r\n            \"transportation_mode_id\": 1,\r\n            \"remarks\": \"test\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/form_submit",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"form_submit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Commute",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/list/1/commutes",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"list",
+								"1",
+								"commutes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Commute",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\": [\r\n        {\r\n            \"id\": 10,\r\n            \"consumer_id\": {{parent_location_id}},\r\n            \"ghg_protocol_scope\": 3,\r\n            \"start_date\": \"2017-01-01\",\r\n            \"end_date\": \"2021-01-31\",\r\n            \"nb_pax\": 2,\r\n            \"consumption\": 3.0,\r\n            \"distance_unit_id\": {{distance_unit_id}},\r\n            \"transportation_mode_id\": 1,\r\n            \"remarks\": \"test\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/form_submit?form_id=6&subscriber_id=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"form_submit"
+							],
+							"query": [
+								{
+									"key": "form_id",
+									"value": "6"
+								},
+								{
+									"key": "subscriber_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Staff Record",
+			"item": [
+				{
+					"name": "New Request",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"form_id\": 93,\r\n    \"subscriber_id\": 1,\r\n    \"data\": [\r\n        {\r\n            \"consumer_id\": {{parent_location_id}},\r\n            \"start_date\": \"2016-01-01\",\r\n            \"staff_code\": \"{{staff_code}}\",\r\n            \"end_date\": \"2020-08-30\",\r\n            \"year_of_birth\": {{year_of_birth}},\r\n            \"gender_id\": {{gender_id}},\r\n            \"nationality_id\": {{nationality_id}},\r\n            \"ethnicity_id\": {{ethnicity_id}},\r\n            \"hired_locally\": \"Yes\",\r\n            \"contract_end_reason_id\": {{contract_end_reason_id}},\r\n            \"remarks\": \"Test\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/form_submit",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"form_submit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"Staff record_id\", data.data[0]['id']); \r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/list/1/staffs",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"list",
+								"1",
+								"staffs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\": [\r\n        {\r\n            \"id\":{{Staff record_id}},\r\n            \"consumer_id\": {{parent_location_id}},\r\n            \"start_date\": \"2016-01-01\",\r\n            \"staff_code\": \"{{staff_code}}\",\r\n            \"end_date\": \"2020-08-30\",\r\n            \"year_of_birth\": {{year_of_birth}},\r\n            \"gender_id\": {{gender_id}},\r\n            \"nationality_id\": {{nationality_id}},\r\n            \"ethnicity_id\": {{ethnicity_id}},\r\n            \"hired_locally\": \"Yes\",\r\n            \"contract_end_reason_id\": {{contract_end_reason_id}},\r\n            \"remarks\": \"Test\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/form_submit?subscriber_id=1&form_id=93",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"form_submit"
+							],
+							"query": [
+								{
+									"key": "subscriber_id",
+									"value": "1"
+								},
+								{
+									"key": "form_id",
+									"value": "93"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/form_submit?form_id=93&subscriber_id=1&id={{Staff record_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"form_submit"
+							],
+							"query": [
+								{
+									"key": "form_id",
+									"value": "93"
+								},
+								{
+									"key": "subscriber_id",
+									"value": "1"
+								},
+								{
+									"key": "id",
+									"value": "{{Staff record_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
