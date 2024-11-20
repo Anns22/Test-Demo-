@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite thread-count="1" name="Failed suite [Surefire suite]" verbose="0">
+  <test thread-count="1" name="Surefire test(failed)" verbose="0">
+    <classes>
+      <class name="com.testing.TestRunner">
+        <methods>
+          <include name="NewUserApproval"/>
+          <include name="Logout_Admin"/>
+          <include name="CreateStaff"/>
+          <include name="CreateAdmin"/>
+          <include name="CreateTag"/>
+          <include name="Login_PredefinedCustomer"/>
+          <include name="CreateSlot"/>
+          <include name="BookingFlowCustomer"/>
+          <include name="ApiRunner"/>
+          <include name="ServiceCreation"/>
+          <include name="signupCustomer"/>
+          <include name="AdminLogin"/>
+          <include name="load_Properties"/>
+        </methods>
+      </class> <!-- com.testing.TestRunner -->
+    </classes>
+  </test> <!-- Surefire test(failed) -->
+</suite> <!-- Failed suite [Surefire suite] -->

@@ -1,0 +1,154 @@
+-------------------------------------------------------------------------------
+Test set: com.testing.TestRunner
+-------------------------------------------------------------------------------
+Tests run: 12, Failures: 11, Errors: 0, Skipped: 0, Time elapsed: 1,418.121 s <<< FAILURE! - in com.testing.TestRunner
+com.testing.TestRunner.signupCustomer  Time elapsed: 128.231 s  <<< FAILURE!
+org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: Proxy element for: DefaultElementLocator 'By.xpath: //android.view.View[@content-desc="Sign up"]' (tried for 120 second(s) with 500 milliseconds interval)
+	at com.testing.TestRunner.signupCustomer(TestRunner.java:47)
+Caused by: org.openqa.selenium.NoSuchElementException: 
+An element could not be located on the page using the given search parameters.
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: '4.26.0', revision: '8ccf0219d7'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.0.1'
+Driver info: io.appium.java_client.android.AndroidDriver
+Command: [6fd00010-e81c-4fa6-bfcc-e0c7e1b901be, findElement {value=//android.view.View[@content-desc="Sign up"], using=xpath}]
+Capabilities {appium:appActivity: com.petcaretechnologies.app..., appium:appPackage: com.petcaretechnologies.app, appium:automationName: UiAutomator2, appium:databaseEnabled: false, appium:desired: {appActivity: com.petcaretechnologies.app..., appPackage: com.petcaretechnologies.app, automationName: UiAutomator2, deviceName: Pixel 6 Pro API 33, fullReset: false, newCommandTimeout: 100000, noReset: true, platformName: ANDROID, platformVersion: 13.0}, appium:deviceApiLevel: 33, appium:deviceManufacturer: Google, appium:deviceModel: sdk_gphone64_x86_64, appium:deviceName: emulator-5554, appium:deviceScreenDensity: 560, appium:deviceScreenSize: 1440x3120, appium:deviceUDID: emulator-5554, appium:fullReset: false, appium:javascriptEnabled: true, appium:locationContextEnabled: false, appium:networkConnectionEnabled: true, appium:newCommandTimeout: 100000, appium:noReset: true, appium:pixelRatio: 3.5, appium:platformVersion: 13, appium:statBarHeight: 84, appium:takesScreenshot: true, appium:viewportRect: {height: 3036, left: 0, top: 84, width: 1440}, appium:warnings: {}, appium:webStorageEnabled: false, platformName: ANDROID}
+Session ID: 6fd00010-e81c-4fa6-bfcc-e0c7e1b901be
+	at com.testing.TestRunner.signupCustomer(TestRunner.java:47)
+
+com.testing.TestRunner.AdminLogin  Time elapsed: 120.193 s  <<< FAILURE!
+org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: Proxy element for: DefaultElementLocator 'By.xpath: //android.widget.EditText[@hint='Continue with email']' (tried for 120 second(s) with 500 milliseconds interval)
+	at com.testing.TestRunner.AdminLogin(TestRunner.java:66)
+Caused by: org.openqa.selenium.NoSuchElementException: 
+An element could not be located on the page using the given search parameters.
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: '4.26.0', revision: '8ccf0219d7'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.0.1'
+Driver info: io.appium.java_client.android.AndroidDriver
+Command: [3bdd4d28-a212-432f-8440-f8b3a6c4c6d1, findElement {value=//android.widget.EditText[@hint='Continue with email'], using=xpath}]
+Capabilities {appium:appActivity: com.petcaretechnologies.app..., appium:appPackage: com.petcaretechnologies.app, appium:automationName: UiAutomator2, appium:databaseEnabled: false, appium:desired: {appActivity: com.petcaretechnologies.app..., appPackage: com.petcaretechnologies.app, automationName: UiAutomator2, deviceName: Pixel 6 Pro API 33, fullReset: false, newCommandTimeout: 100000, noReset: true, platformName: ANDROID, platformVersion: 13.0}, appium:deviceApiLevel: 33, appium:deviceManufacturer: Google, appium:deviceModel: sdk_gphone64_x86_64, appium:deviceName: emulator-5554, appium:deviceScreenDensity: 560, appium:deviceScreenSize: 1440x3120, appium:deviceUDID: emulator-5554, appium:fullReset: false, appium:javascriptEnabled: true, appium:locationContextEnabled: false, appium:networkConnectionEnabled: true, appium:newCommandTimeout: 100000, appium:noReset: true, appium:pixelRatio: 3.5, appium:platformVersion: 13, appium:statBarHeight: 84, appium:takesScreenshot: true, appium:viewportRect: {height: 3036, left: 0, top: 84, width: 1440}, appium:warnings: {}, appium:webStorageEnabled: false, platformName: ANDROID}
+Session ID: 3bdd4d28-a212-432f-8440-f8b3a6c4c6d1
+	at com.testing.TestRunner.AdminLogin(TestRunner.java:66)
+
+com.testing.TestRunner.NewUserApproval  Time elapsed: 120.681 s  <<< FAILURE!
+org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: Proxy element for: DefaultElementLocator 'By.xpath: //android.widget.ImageView[@content-desc="Tab 4 of 6"]' (tried for 120 second(s) with 500 milliseconds interval)
+	at com.testing.TestRunner.NewUserApproval(TestRunner.java:75)
+Caused by: org.openqa.selenium.NoSuchElementException: 
+An element could not be located on the page using the given search parameters.
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: '4.26.0', revision: '8ccf0219d7'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.0.1'
+Driver info: io.appium.java_client.android.AndroidDriver
+Command: [3bdd4d28-a212-432f-8440-f8b3a6c4c6d1, findElement {value=//android.widget.ImageView[@content-desc="Tab 4 of 6"], using=xpath}]
+Capabilities {appium:appActivity: com.petcaretechnologies.app..., appium:appPackage: com.petcaretechnologies.app, appium:automationName: UiAutomator2, appium:databaseEnabled: false, appium:desired: {appActivity: com.petcaretechnologies.app..., appPackage: com.petcaretechnologies.app, automationName: UiAutomator2, deviceName: Pixel 6 Pro API 33, fullReset: false, newCommandTimeout: 100000, noReset: true, platformName: ANDROID, platformVersion: 13.0}, appium:deviceApiLevel: 33, appium:deviceManufacturer: Google, appium:deviceModel: sdk_gphone64_x86_64, appium:deviceName: emulator-5554, appium:deviceScreenDensity: 560, appium:deviceScreenSize: 1440x3120, appium:deviceUDID: emulator-5554, appium:fullReset: false, appium:javascriptEnabled: true, appium:locationContextEnabled: false, appium:networkConnectionEnabled: true, appium:newCommandTimeout: 100000, appium:noReset: true, appium:pixelRatio: 3.5, appium:platformVersion: 13, appium:statBarHeight: 84, appium:takesScreenshot: true, appium:viewportRect: {height: 3036, left: 0, top: 84, width: 1440}, appium:warnings: {}, appium:webStorageEnabled: false, platformName: ANDROID}
+Session ID: 3bdd4d28-a212-432f-8440-f8b3a6c4c6d1
+	at com.testing.TestRunner.NewUserApproval(TestRunner.java:75)
+
+com.testing.TestRunner.CreateAdmin  Time elapsed: 127.544 s  <<< FAILURE!
+org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: Proxy element for: DefaultElementLocator 'By.xpath: //android.widget.ImageView[@content-desc="Tab 4 of 6"]' (tried for 120 second(s) with 500 milliseconds interval)
+	at com.testing.TestRunner.CreateAdmin(TestRunner.java:84)
+Caused by: org.openqa.selenium.NoSuchElementException: 
+An element could not be located on the page using the given search parameters.
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: '4.26.0', revision: '8ccf0219d7'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.0.1'
+Driver info: io.appium.java_client.android.AndroidDriver
+Command: [3bdd4d28-a212-432f-8440-f8b3a6c4c6d1, findElement {value=//android.widget.ImageView[@content-desc="Tab 4 of 6"], using=xpath}]
+Capabilities {appium:appActivity: com.petcaretechnologies.app..., appium:appPackage: com.petcaretechnologies.app, appium:automationName: UiAutomator2, appium:databaseEnabled: false, appium:desired: {appActivity: com.petcaretechnologies.app..., appPackage: com.petcaretechnologies.app, automationName: UiAutomator2, deviceName: Pixel 6 Pro API 33, fullReset: false, newCommandTimeout: 100000, noReset: true, platformName: ANDROID, platformVersion: 13.0}, appium:deviceApiLevel: 33, appium:deviceManufacturer: Google, appium:deviceModel: sdk_gphone64_x86_64, appium:deviceName: emulator-5554, appium:deviceScreenDensity: 560, appium:deviceScreenSize: 1440x3120, appium:deviceUDID: emulator-5554, appium:fullReset: false, appium:javascriptEnabled: true, appium:locationContextEnabled: false, appium:networkConnectionEnabled: true, appium:newCommandTimeout: 100000, appium:noReset: true, appium:pixelRatio: 3.5, appium:platformVersion: 13, appium:statBarHeight: 84, appium:takesScreenshot: true, appium:viewportRect: {height: 3036, left: 0, top: 84, width: 1440}, appium:warnings: {}, appium:webStorageEnabled: false, platformName: ANDROID}
+Session ID: 3bdd4d28-a212-432f-8440-f8b3a6c4c6d1
+	at com.testing.TestRunner.CreateAdmin(TestRunner.java:84)
+
+com.testing.TestRunner.CreateStaff  Time elapsed: 120.292 s  <<< FAILURE!
+org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: Proxy element for: DefaultElementLocator 'By.xpath: //android.widget.ImageView[@content-desc="Tab 4 of 6"]' (tried for 120 second(s) with 500 milliseconds interval)
+	at com.testing.TestRunner.CreateStaff(TestRunner.java:93)
+Caused by: org.openqa.selenium.NoSuchElementException: 
+An element could not be located on the page using the given search parameters.
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: '4.26.0', revision: '8ccf0219d7'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.0.1'
+Driver info: io.appium.java_client.android.AndroidDriver
+Command: [3bdd4d28-a212-432f-8440-f8b3a6c4c6d1, findElement {value=//android.widget.ImageView[@content-desc="Tab 4 of 6"], using=xpath}]
+Capabilities {appium:appActivity: com.petcaretechnologies.app..., appium:appPackage: com.petcaretechnologies.app, appium:automationName: UiAutomator2, appium:databaseEnabled: false, appium:desired: {appActivity: com.petcaretechnologies.app..., appPackage: com.petcaretechnologies.app, automationName: UiAutomator2, deviceName: Pixel 6 Pro API 33, fullReset: false, newCommandTimeout: 100000, noReset: true, platformName: ANDROID, platformVersion: 13.0}, appium:deviceApiLevel: 33, appium:deviceManufacturer: Google, appium:deviceModel: sdk_gphone64_x86_64, appium:deviceName: emulator-5554, appium:deviceScreenDensity: 560, appium:deviceScreenSize: 1440x3120, appium:deviceUDID: emulator-5554, appium:fullReset: false, appium:javascriptEnabled: true, appium:locationContextEnabled: false, appium:networkConnectionEnabled: true, appium:newCommandTimeout: 100000, appium:noReset: true, appium:pixelRatio: 3.5, appium:platformVersion: 13, appium:statBarHeight: 84, appium:takesScreenshot: true, appium:viewportRect: {height: 3036, left: 0, top: 84, width: 1440}, appium:warnings: {}, appium:webStorageEnabled: false, platformName: ANDROID}
+Session ID: 3bdd4d28-a212-432f-8440-f8b3a6c4c6d1
+	at com.testing.TestRunner.CreateStaff(TestRunner.java:93)
+
+com.testing.TestRunner.CreateTag  Time elapsed: 120.281 s  <<< FAILURE!
+org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: Proxy element for: DefaultElementLocator 'By.xpath: //android.widget.ImageView[@content-desc="Tab 4 of 6"]' (tried for 120 second(s) with 500 milliseconds interval)
+	at com.testing.TestRunner.CreateTag(TestRunner.java:101)
+Caused by: org.openqa.selenium.NoSuchElementException: 
+An element could not be located on the page using the given search parameters.
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: '4.26.0', revision: '8ccf0219d7'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.0.1'
+Driver info: io.appium.java_client.android.AndroidDriver
+Command: [3bdd4d28-a212-432f-8440-f8b3a6c4c6d1, findElement {value=//android.widget.ImageView[@content-desc="Tab 4 of 6"], using=xpath}]
+Capabilities {appium:appActivity: com.petcaretechnologies.app..., appium:appPackage: com.petcaretechnologies.app, appium:automationName: UiAutomator2, appium:databaseEnabled: false, appium:desired: {appActivity: com.petcaretechnologies.app..., appPackage: com.petcaretechnologies.app, automationName: UiAutomator2, deviceName: Pixel 6 Pro API 33, fullReset: false, newCommandTimeout: 100000, noReset: true, platformName: ANDROID, platformVersion: 13.0}, appium:deviceApiLevel: 33, appium:deviceManufacturer: Google, appium:deviceModel: sdk_gphone64_x86_64, appium:deviceName: emulator-5554, appium:deviceScreenDensity: 560, appium:deviceScreenSize: 1440x3120, appium:deviceUDID: emulator-5554, appium:fullReset: false, appium:javascriptEnabled: true, appium:locationContextEnabled: false, appium:networkConnectionEnabled: true, appium:newCommandTimeout: 100000, appium:noReset: true, appium:pixelRatio: 3.5, appium:platformVersion: 13, appium:statBarHeight: 84, appium:takesScreenshot: true, appium:viewportRect: {height: 3036, left: 0, top: 84, width: 1440}, appium:warnings: {}, appium:webStorageEnabled: false, platformName: ANDROID}
+Session ID: 3bdd4d28-a212-432f-8440-f8b3a6c4c6d1
+	at com.testing.TestRunner.CreateTag(TestRunner.java:101)
+
+com.testing.TestRunner.CreateSlot  Time elapsed: 120.244 s  <<< FAILURE!
+org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: Proxy element for: DefaultElementLocator 'By.xpath: //android.widget.ImageView[@content-desc="Tab 5 of 6"]' (tried for 120 second(s) with 500 milliseconds interval)
+	at com.testing.TestRunner.CreateSlot(TestRunner.java:109)
+Caused by: org.openqa.selenium.NoSuchElementException: 
+An element could not be located on the page using the given search parameters.
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: '4.26.0', revision: '8ccf0219d7'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.0.1'
+Driver info: io.appium.java_client.android.AndroidDriver
+Command: [3bdd4d28-a212-432f-8440-f8b3a6c4c6d1, findElement {value=//android.widget.ImageView[@content-desc="Tab 5 of 6"], using=xpath}]
+Capabilities {appium:appActivity: com.petcaretechnologies.app..., appium:appPackage: com.petcaretechnologies.app, appium:automationName: UiAutomator2, appium:databaseEnabled: false, appium:desired: {appActivity: com.petcaretechnologies.app..., appPackage: com.petcaretechnologies.app, automationName: UiAutomator2, deviceName: Pixel 6 Pro API 33, fullReset: false, newCommandTimeout: 100000, noReset: true, platformName: ANDROID, platformVersion: 13.0}, appium:deviceApiLevel: 33, appium:deviceManufacturer: Google, appium:deviceModel: sdk_gphone64_x86_64, appium:deviceName: emulator-5554, appium:deviceScreenDensity: 560, appium:deviceScreenSize: 1440x3120, appium:deviceUDID: emulator-5554, appium:fullReset: false, appium:javascriptEnabled: true, appium:locationContextEnabled: false, appium:networkConnectionEnabled: true, appium:newCommandTimeout: 100000, appium:noReset: true, appium:pixelRatio: 3.5, appium:platformVersion: 13, appium:statBarHeight: 84, appium:takesScreenshot: true, appium:viewportRect: {height: 3036, left: 0, top: 84, width: 1440}, appium:warnings: {}, appium:webStorageEnabled: false, platformName: ANDROID}
+Session ID: 3bdd4d28-a212-432f-8440-f8b3a6c4c6d1
+	at com.testing.TestRunner.CreateSlot(TestRunner.java:109)
+
+com.testing.TestRunner.ServiceCreation  Time elapsed: 126.233 s  <<< FAILURE!
+org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: Proxy element for: DefaultElementLocator 'By.xpath: //android.widget.ImageView[@content-desc="Tab 5 of 6"]' (tried for 120 second(s) with 500 milliseconds interval)
+	at com.testing.TestRunner.ServiceCreation(TestRunner.java:119)
+Caused by: org.openqa.selenium.NoSuchElementException: 
+An element could not be located on the page using the given search parameters.
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: '4.26.0', revision: '8ccf0219d7'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.0.1'
+Driver info: io.appium.java_client.android.AndroidDriver
+Command: [3bdd4d28-a212-432f-8440-f8b3a6c4c6d1, findElement {value=//android.widget.ImageView[@content-desc="Tab 5 of 6"], using=xpath}]
+Capabilities {appium:appActivity: com.petcaretechnologies.app..., appium:appPackage: com.petcaretechnologies.app, appium:automationName: UiAutomator2, appium:databaseEnabled: false, appium:desired: {appActivity: com.petcaretechnologies.app..., appPackage: com.petcaretechnologies.app, automationName: UiAutomator2, deviceName: Pixel 6 Pro API 33, fullReset: false, newCommandTimeout: 100000, noReset: true, platformName: ANDROID, platformVersion: 13.0}, appium:deviceApiLevel: 33, appium:deviceManufacturer: Google, appium:deviceModel: sdk_gphone64_x86_64, appium:deviceName: emulator-5554, appium:deviceScreenDensity: 560, appium:deviceScreenSize: 1440x3120, appium:deviceUDID: emulator-5554, appium:fullReset: false, appium:javascriptEnabled: true, appium:locationContextEnabled: false, appium:networkConnectionEnabled: true, appium:newCommandTimeout: 100000, appium:noReset: true, appium:pixelRatio: 3.5, appium:platformVersion: 13, appium:statBarHeight: 84, appium:takesScreenshot: true, appium:viewportRect: {height: 3036, left: 0, top: 84, width: 1440}, appium:warnings: {}, appium:webStorageEnabled: false, platformName: ANDROID}
+Session ID: 3bdd4d28-a212-432f-8440-f8b3a6c4c6d1
+	at com.testing.TestRunner.ServiceCreation(TestRunner.java:119)
+
+com.testing.TestRunner.Logout_Admin  Time elapsed: 120.549 s  <<< FAILURE!
+org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: Proxy element for: DefaultElementLocator 'By.xpath: //*[starts-with(@content-desc,'Tab 6 of 6')]' (tried for 120 second(s) with 500 milliseconds interval)
+	at com.testing.TestRunner.Logout_Admin(TestRunner.java:126)
+Caused by: org.openqa.selenium.NoSuchElementException: 
+An element could not be located on the page using the given search parameters.
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: '4.26.0', revision: '8ccf0219d7'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.0.1'
+Driver info: io.appium.java_client.android.AndroidDriver
+Command: [3bdd4d28-a212-432f-8440-f8b3a6c4c6d1, findElement {value=//*[starts-with(@content-desc,'Tab 6 of 6')], using=xpath}]
+Capabilities {appium:appActivity: com.petcaretechnologies.app..., appium:appPackage: com.petcaretechnologies.app, appium:automationName: UiAutomator2, appium:databaseEnabled: false, appium:desired: {appActivity: com.petcaretechnologies.app..., appPackage: com.petcaretechnologies.app, automationName: UiAutomator2, deviceName: Pixel 6 Pro API 33, fullReset: false, newCommandTimeout: 100000, noReset: true, platformName: ANDROID, platformVersion: 13.0}, appium:deviceApiLevel: 33, appium:deviceManufacturer: Google, appium:deviceModel: sdk_gphone64_x86_64, appium:deviceName: emulator-5554, appium:deviceScreenDensity: 560, appium:deviceScreenSize: 1440x3120, appium:deviceUDID: emulator-5554, appium:fullReset: false, appium:javascriptEnabled: true, appium:locationContextEnabled: false, appium:networkConnectionEnabled: true, appium:newCommandTimeout: 100000, appium:noReset: true, appium:pixelRatio: 3.5, appium:platformVersion: 13, appium:statBarHeight: 84, appium:takesScreenshot: true, appium:viewportRect: {height: 3036, left: 0, top: 84, width: 1440}, appium:warnings: {}, appium:webStorageEnabled: false, platformName: ANDROID}
+Session ID: 3bdd4d28-a212-432f-8440-f8b3a6c4c6d1
+	at com.testing.TestRunner.Logout_Admin(TestRunner.java:126)
+
+com.testing.TestRunner.Login_PredefinedCustomer  Time elapsed: 120.58 s  <<< FAILURE!
+org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: Proxy element for: DefaultElementLocator 'By.xpath: //android.widget.EditText[@hint='Continue with email']' (tried for 120 second(s) with 500 milliseconds interval)
+	at com.testing.TestRunner.Login_PredefinedCustomer(TestRunner.java:132)
+Caused by: org.openqa.selenium.NoSuchElementException: 
+An element could not be located on the page using the given search parameters.
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: '4.26.0', revision: '8ccf0219d7'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.0.1'
+Driver info: io.appium.java_client.android.AndroidDriver
+Command: [3bdd4d28-a212-432f-8440-f8b3a6c4c6d1, findElement {value=//android.widget.EditText[@hint='Continue with email'], using=xpath}]
+Capabilities {appium:appActivity: com.petcaretechnologies.app..., appium:appPackage: com.petcaretechnologies.app, appium:automationName: UiAutomator2, appium:databaseEnabled: false, appium:desired: {appActivity: com.petcaretechnologies.app..., appPackage: com.petcaretechnologies.app, automationName: UiAutomator2, deviceName: Pixel 6 Pro API 33, fullReset: false, newCommandTimeout: 100000, noReset: true, platformName: ANDROID, platformVersion: 13.0}, appium:deviceApiLevel: 33, appium:deviceManufacturer: Google, appium:deviceModel: sdk_gphone64_x86_64, appium:deviceName: emulator-5554, appium:deviceScreenDensity: 560, appium:deviceScreenSize: 1440x3120, appium:deviceUDID: emulator-5554, appium:fullReset: false, appium:javascriptEnabled: true, appium:locationContextEnabled: false, appium:networkConnectionEnabled: true, appium:newCommandTimeout: 100000, appium:noReset: true, appium:pixelRatio: 3.5, appium:platformVersion: 13, appium:statBarHeight: 84, appium:takesScreenshot: true, appium:viewportRect: {height: 3036, left: 0, top: 84, width: 1440}, appium:warnings: {}, appium:webStorageEnabled: false, platformName: ANDROID}
+Session ID: 3bdd4d28-a212-432f-8440-f8b3a6c4c6d1
+	at com.testing.TestRunner.Login_PredefinedCustomer(TestRunner.java:132)
+
+com.testing.TestRunner.BookingFlowCustomer  Time elapsed: 150.564 s  <<< FAILURE!
+org.openqa.selenium.TimeoutException: 
+Expected condition failed: waiting for element to be clickable: By.xpath: //android.view.View[contains(@content-desc,"Service Ator")] (tried for 120 second(s) with 500 milliseconds interval)
+Build info: version: '4.26.0', revision: '8ccf0219d7'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.0.1'
+Driver info: io.appium.java_client.android.AndroidDriver
+Capabilities {appium:appActivity: com.petcaretechnologies.app..., appium:appPackage: com.petcaretechnologies.app, appium:automationName: UiAutomator2, appium:databaseEnabled: false, appium:desired: {appActivity: com.petcaretechnologies.app..., appPackage: com.petcaretechnologies.app, automationName: UiAutomator2, deviceName: Pixel 6 Pro API 33, fullReset: false, newCommandTimeout: 100000, noReset: true, platformName: ANDROID, platformVersion: 13.0}, appium:deviceApiLevel: 33, appium:deviceManufacturer: Google, appium:deviceModel: sdk_gphone64_x86_64, appium:deviceName: emulator-5554, appium:deviceScreenDensity: 560, appium:deviceScreenSize: 1440x3120, appium:deviceUDID: emulator-5554, appium:fullReset: false, appium:javascriptEnabled: true, appium:locationContextEnabled: false, appium:networkConnectionEnabled: true, appium:newCommandTimeout: 100000, appium:noReset: true, appium:pixelRatio: 3.5, appium:platformVersion: 13, appium:statBarHeight: 84, appium:takesScreenshot: true, appium:viewportRect: {height: 3036, left: 0, top: 84, width: 1440}, appium:warnings: {}, appium:webStorageEnabled: false, platformName: ANDROID}
+Session ID: 3bdd4d28-a212-432f-8440-f8b3a6c4c6d1
+	at com.testing.TestRunner.BookingFlowCustomer(TestRunner.java:140)
+
