@@ -22,10 +22,10 @@ jobs:
     - name: Install dependencies
       run: flutter pub get
 
-    - name: Build APK
+    - name: Build APK (Debug)
       run: flutter build apk --debug
-      
-      - name: Build APK
-        run: |
-          curl -X POST "http://localhost:8080/job/Appium/build?token=Token" \
-            --user "annsherry:110bee13155090af355e95356b48653df4"
+
+    - name: Trigger Jenkins Build
+      run: |
+        curl -X POST "http://localhost:8080/job/Appium/build?token=Token" \
+          --user "annsherry:110bee13155090af355e95356b48653df4"
