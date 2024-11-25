@@ -21,8 +21,9 @@ jobs:
       
       - name: Trigger Jenkins Job
         run: |
-          curl -X POST "http://localhost:8080/job/Appium/build?token=<11cdf58bf8d7c7ef2f1841bdbfdfabd51b>" \
-            --user <annsherry>:${{11cdf58bf8d7c7ef2f1841bdbfdfabd51b }}
-        env:
-          JENKINS_API_TOKEN: ${{11cdf58bf8d7c7ef2f1841bdbfdfabd51b }}
+         curl -X POST "http://localhost:8080/job/Appium/build?token=110bee13155090af355e95356b48653df4" \
+  --user "annsherry:110bee13155090af355e95356b48653df4"
+
+        //env:
+          //JENKINS_API_TOKEN: ${{11cdf58bf8d7c7ef2f1841bdbfdfabd51b }}
 
