@@ -1,26 +1,28 @@
-name: Trigger Jenkins Job
+name: Trigger Jenkins Build on Push
+
+
 
 on:
   push:
-    branches:
-      - main  # Trigger workflow on pushes to the 'main' branch
+    branches:
+      - master   # Trigger on push to 'main' branch
+  pull_request:
+    branches:
+      - master   # Trigger on pull requests targeting 'master' branch
+
+
 
 jobs:
   trigger-Jenkins:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Trigger Jenkins Job
+        run: |
+          curl -X POST "http://localhost:8080/job/Appium/build?token=<11cdf58bf8d7c7ef2f1841bdbfdfabd51b>" \
+            --user <annsherry>:${{11cdf58bf8d7c7ef2f1841bdbfdfabd51b }}
+        env:
+          JENKINS_API_TOKEN: ${{11cdf58bf8d7c7ef2f1841bdbfdfabd51b }}
 
-    steps:
-    # Step 1: Checkout the code
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    # Step 2: Trigger Jenkins Job
-    - name: Trigger Jenkins Build
-      run: |
-        curl -X POST "$JENKINS_URL?token=$JENKINS_TOKEN" \
-        --user "$JENKINS_USER" \
-        --data-urlencode json='{"parameter": [{"name": "ENVIRONMENT", "value": "staging"}]}'
-      env:
-        JENKINS_URL: ${{ http://localhost:8080/ }}
-        JENKINS_TOKEN: ${{ 11cdf58bf8d7c7ef2f1841bdbfdfabd51b }}
-        JENKINS_USER: ${{ annsherry }}
