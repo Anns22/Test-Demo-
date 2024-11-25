@@ -1,33 +1,26 @@
-name: Build APK
+name: Trigger Jenkins Job
 
 on:
   push:
     branches:
-      - main  # Or the specific branch you'd like to trigger the build
-  workflow_dispatch:
+      - main  # Trigger workflow on pushes to the 'main' branch
 
 jobs:
-  build-apk:
+  trigger-Jenkins:
     runs-on: ubuntu-latest
 
     steps:
+    # Step 1: Checkout the code
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Set up Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        flutter-version: '3.24.4'  # Update to the required Flutter version
-
-    - name: Install dependencies
-      run: flutter pub get
-
-    - name: Build APK
-      run: flutter build apk --debug
-
-
-    - name: Trigger Jenkins Job
-      if: success()  # Runs only if previous steps were successful
+    # Step 2: Trigger Jenkins Job
+    - name: Trigger Jenkins Build
       run: |
-        curl -X POST "${{ secrets.JENKINS_URL }}/job/${{ secrets.JENKINS_JOB_NAME }}/buildWithParameters?ENVIRONMENT=staging" \
-        --user "${{ secrets.JENKINS_USERNAME }}:${{ secrets.JENKINS_API_TOKEN }}"   
+        curl -X POST "$JENKINS_URL?token=$JENKINS_TOKEN" \
+        --user "$JENKINS_USER" \
+        --data-urlencode json='{"parameter": [{"name": "ENVIRONMENT", "value": "staging"}]}'
+      env:
+        JENKINS_URL: ${{ http://localhost:8080/ }}
+        JENKINS_TOKEN: ${{ 11cdf58bf8d7c7ef2f1841bdbfdfabd51b }}
+        JENKINS_USER: ${{ annsherry }}
