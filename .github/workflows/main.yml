@@ -5,7 +5,7 @@ name: Trigger Jenkins Build on Push
 on:
   push:
     branches:
-      - master   # Trigger on push to 'main' branch
+      - master   # Trigger on push to 'master' branch
   pull_request:
     branches:
       - master   # Trigger on pull requests targeting 'master' branch
