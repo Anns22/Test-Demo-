@@ -1,28 +1,21 @@
 name: Trigger Jenkins Build on Push
 
-
-
 on:
   push:
-    branches:
-      - master   # Trigger on push to 'master' branch
+    branches:
+      - master   # Trigger on push to 'master' branch
   pull_request:
-    branches:
-      - master   # Trigger on pull requests targeting 'master' branch
-
-
+    branches:
+      - master   # Trigger on pull requests targeting 'master' branch
 
 jobs:
   trigger-Jenkins:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      
-      - name: Trigger Jenkins Job
-        run: |
-         curl -X POST "http://localhost:8080/job/Appium/build?token= Token" \
-  --user "annsherry:110bee13155090af355e95356b48653df4"
-
-     
-
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Trigger Jenkins Job
+        run: |
+          curl -X POST "http://localhost:8080/job/Appium/build?token=Token" \
+            --user "annsherry:110bee13155090af355e95356b48653df4"
