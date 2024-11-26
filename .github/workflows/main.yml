@@ -32,7 +32,8 @@ jobs:
           JENKINS_USER: "annsherry"
           JENKINS_TOKEN: "110bee13155090af355e95356b48653df4"
         run: |
-          curl -X POST "${http://localhost:8080}/job/${Appium}/build?token=${110bee13155090af355e95356b48653df4}" \
-            --user "${annsherry}:${110bee13155090af355e95356b48653df4}"
+          curl -X POST "$JENKINS_URL/job/$JENKINS_JOB/build?token=$JENKINS_TOKEN" \
+            --user "$JENKINS_USER:$JENKINS_TOKEN"
+
 
    
