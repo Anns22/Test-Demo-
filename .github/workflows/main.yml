@@ -26,7 +26,7 @@ jobs:
       run: flutter build apk --debug
   - name: Trigger Jenkins Build
       run: |
-        curl -X POST "http://localhost:8080/job/Appium/build?token=Token" \
+        curl -X POST "http://localhost:8080/job/Appium/build?token=110bee13155090af355e95356b48653df4" \
           --user "annsherry:110bee13155090af355e95356b48653df4"
  
    
