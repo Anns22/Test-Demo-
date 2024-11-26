@@ -30,7 +30,7 @@ jobs:
           JENKINS_URL: " https://8773-2401-4900-1ce3-7655-ddf7-7fb8-d3d3-8b67.ngrok-free.app"
           JENKINS_JOB: "Appium"
           JENKINS_USER: "annsherry"
-          JENKINS_TOKEN: "110bee13155090af355e95356b48653df4"
+          JENKINS_TOKEN: "1149875c743d7b167872d8ed4a061bee58"
         run: |
           curl -X POST "$JENKINS_URL/job/$JENKINS_JOB/build?token=$JENKINS_TOKEN" \
             --user "$JENKINS_USER:$JENKINS_TOKEN"
