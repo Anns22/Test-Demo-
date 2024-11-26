@@ -3,7 +3,7 @@ name: Build APK
 on:
   push:
     branches:
-      - master  # Or the specific branch you'd like to trigger the build
+      - master
   workflow_dispatch:
 
 jobs:
@@ -17,7 +17,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.24.4'  # Update to the required Flutter version
+          flutter-version: '3.24.4'
 
       - name: Install dependencies
         run: flutter pub get
@@ -25,15 +25,19 @@ jobs:
       - name: Build APK (Debug)
         run: flutter build apk --debug
 
+      - name: Debug Variables
+        run: |
+          echo "JENKINS_URL: '$JENKINS_URL'"
+          echo "JENKINS_JOB: '$JENKINS_JOB'"
+          echo "JENKINS_USER: '$JENKINS_USER'"
+          echo "JENKINS_TOKEN: '$JENKINS_TOKEN'"
+
       - name: Trigger Jenkins Build
         env:
-          JENKINS_URL: " https://8773-2401-4900-1ce3-7655-ddf7-7fb8-d3d3-8b67.ngrok-free.app"
+          JENKINS_URL: "https://8773-2401-4900-1ce3-7655-ddf7-7fb8-d3d3-8b67.ngrok-free.app"
           JENKINS_JOB: "Appium"
           JENKINS_USER: "annsherry"
           JENKINS_TOKEN: "1149875c743d7b167872d8ed4a061bee58"
         run: |
-          curl -X POST "$JENKINS_URL/job/$JENKINS_JOB/build?token=$JENKINS_TOKEN" \
+          curl -v -X POST "$JENKINS_URL/job/$JENKINS_JOB/build?token=$JENKINS_TOKEN" \
             --user "$JENKINS_USER:$JENKINS_TOKEN"
-
-
-   
