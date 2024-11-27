@@ -34,7 +34,7 @@ jobs:
 
       - name: Trigger Jenkins Build
         env:
-          JENKINS_URL: "https://8773-2401-4900-1ce3-7655-ddf7-7fb8-d3d3-8b67.ngrok-free.app"
+          JENKINS_URL: " https://968b-2401-4900-1ce2-d4d4-485f-2d2f-60d4-a602.ngrok-free.app"
           JENKINS_JOB: "Appium"
           JENKINS_USER: "annsherry"
           JENKINS_TOKEN: "1149875c743d7b167872d8ed4a061bee58"
