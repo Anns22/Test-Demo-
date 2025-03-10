@@ -35,13 +35,13 @@ jobs:
 
       - name: Trigger Jenkins Build
         env:
-          JENKINS_URL: "https://jenkins.agilecyber.com/"
+          JENKINS_URL: "https://jenkins.agilecyber.com"
           JENKINS_JOB: "PETAPP_SANITY"
           JENKINS_USER: "agilecyber"
           JENKINS_TOKEN: "1186ccab74ae46177ea02c605d794768e6"
-          JENKINS_ENV: "31933123-60249e6a-a6af-428a-be8f-3653ebc43f38"
         run: |
-          curl -v -X POST "${JENKINS_URL}/job/${JENKINS_JOB}/build?token=${JENKINS_TOKEN}" --data ""
-
-
-
+          CRUMB=$(curl -s -u "${JENKINS_USER}:${JENKINS_TOKEN}" "${JENKINS_URL}/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,\":\",//crumb)")
+          curl -v -X POST "${JENKINS_URL}/job/${JENKINS_JOB}/build" \
+            -H "$CRUMB" \
+            --user "${JENKINS_USER}:${JENKINS_TOKEN}" \
+            --data ""
