@@ -31,6 +31,7 @@ jobs:
           echo "JENKINS_JOB: '$JENKINS_JOB'"
           echo "JENKINS_USER: '$JENKINS_USER'"
           echo "JENKINS_TOKEN: '$JENKINS_TOKEN'"
+          echo "JENKINS_ENV: '$JENKINS_ENV'"
 
       - name: Trigger Jenkins Build
         env:
@@ -38,6 +39,7 @@ jobs:
           JENKINS_JOB: "PETAPP_SANITY"
           JENKINS_USER: "agilecyber"
           JENKINS_TOKEN: "1186ccab74ae46177ea02c605d794768e6"
+          JENKINS_ENV: "31933123-60249e6a-a6af-428a-be8f-3653ebc43f38"
         run: |
           curl -v -X POST "${JENKINS_URL}/job/${JENKINS_JOB}/build?token=${JENKINS_TOKEN}" \
             --user "${JENKINS_USER}:${JENKINS_TOKEN}"
