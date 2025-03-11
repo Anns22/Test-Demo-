@@ -1,9 +1,9 @@
-name: Build APK
+name: Build and Trigger Jenkins
 
 on:
   push:
     branches:
-      - master
+      - master  # Runs when code is pushed to the master branch
   workflow_dispatch:
 
 jobs:
@@ -27,23 +27,26 @@ jobs:
 
       - name: Debug Variables
         run: |
-          echo "JENKINS_URL: '$JENKINS_URL'"
-          echo "JENKINS_JOB: '$JENKINS_JOB'"
-          echo "JENKINS_USER: '$JENKINS_USER'"
-          echo "JENKINS_TOKEN: '$JENKINS_TOKEN'"
-          echo "JENKINS_ENV: '$JENKINS_ENV'"
+          echo "JENKINS_URL: 'https://jenkins.agilecyber.com'"
+          echo "JENKINS_JOB: 'PETAPP_SANITY'"
+          echo "JENKINS_USER: 'agilecyber'"
+          echo "JENKINS_TOKEN: '11ea4aef6175bdf2ef5f54d3c612d22065'"
+          echo "JENKINS_ENV: 'UAT'"
 
+  trigger-jenkins:
+    runs-on: ubuntu-latest
+    needs: build-apk  # Ensure APK build completes before triggering Jenkins
+
+    steps:
       - name: Trigger Jenkins Build
-        env:
-          JENKINS_URL: "https://jenkins.agilecyber.com"
-          JENKINS_JOB: "PETAPP_SANITY"
-          JENKINS_USER: "agilecyber"
-          JENKINS_TOKEN: "119b94eea1e127cc9fd3cae9ac2fb094cd"
-          JENKINS_ENV: "JENKINS_ENV"
-          
         run: |
-          CRUMB=$(curl -s -u "${JENKINS_USER}:${JENKINS_TOKEN}" "${JENKINS_URL}/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,\":\",//crumb)")
-          curl -v -X POST "${JENKINS_URL}/job/${JENKINS_JOB}/build" \
+          echo "Fetching Jenkins Crumb Token..."
+          CRUMB=$(curl -s -u "agilecyber:11ea4aef6175bdf2ef5f54d3c612d22065" "https://jenkins.agilecyber.com/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,\":\",//crumb)")
+
+          echo "Triggering Jenkins Job: PETAPP_SANITY"
+          curl -v -X POST "https://jenkins.agilecyber.com/job/PETAPP_SANITY/buildWithParameters?ENVIRONMENT=UAT" \
             -H "$CRUMB" \
-            --user "${JENKINS_USER}:${JENKINS_TOKEN}" \
+            --user "agilecyber:11ea4aef6175bdf2ef5f54d3c612d22065" \
             --data ""
+
+
