@@ -3,7 +3,7 @@ name: Build and Trigger Jenkins
 on:
   push:
     branches:
-      - master  # Runs when code is pushed to the master branch
+      - master
   workflow_dispatch:
 
 jobs:
@@ -35,19 +35,17 @@ jobs:
 
   trigger-jenkins:
     runs-on: ubuntu-latest
-    needs: build-apk  # Ensure APK build completes before triggering Jenkins
+    needs: build-apk
 
     steps:
       - name: Trigger Jenkins Build
         run: |
           echo "Triggering Jenkins Job: PETAPP_SANITY"
 
-          # Send API request to trigger the Jenkins job
-          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" -X POST "https://jenkins.agilecyber.com/job/PETAPP_SANITY/buildWithParameters?ENVIRONMENT=31933123-60249e6a-a6af-428a-be8f-3653ebc43f38" \
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" -X POST "https://jenkins.agilecyber.com/job/PETAPP_SANITY/buildWithParameters?ENVIRONMENT=UAT" \
             --user "agilecyber:11ea4aef6175bdf2ef5f54d3c612d22065" \
             --data "")
 
-          # Check if the job was successfully triggered
           if [ "$RESPONSE" -eq 201 ]; then
             echo "✅ Jenkins Job Triggered Successfully!"
           else
