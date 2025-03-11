@@ -43,7 +43,7 @@ jobs:
           echo "Triggering Jenkins Job: PETAPP_SANITY"
 
           # Send API request to trigger the Jenkins job
-          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" -X POST "https://jenkins.agilecyber.com/job/PETAPP_SANITY/buildWithParameters?ENVIRONMENT=UAT" \
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" -X POST "https://jenkins.agilecyber.com/job/PETAPP_SANITY/buildWithParameters?ENVIRONMENT=31933123-60249e6a-a6af-428a-be8f-3653ebc43f38" \
             --user "agilecyber:11ea4aef6175bdf2ef5f54d3c612d22065" \
             --data "")
 
