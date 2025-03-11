@@ -46,7 +46,7 @@ jobs:
           echo "Triggering Jenkins Job: PETAPP_SANITY"
           curl -v -X POST "https://jenkins.agilecyber.com/job/PETAPP_SANITY/buildWithParameters?ENVIRONMENT=UAT" \
             -H "$CRUMB" \
-            --user "agilecyber:11ea4aef6175bdf2ef5f54d3c612d22065" \ 
+            --user "agilecyber:11ea4aef6175bdf2ef5f54d3c612d22065" \
             --data ""
 
 
