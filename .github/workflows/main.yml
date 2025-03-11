@@ -38,7 +38,9 @@ jobs:
           JENKINS_URL: "https://jenkins.agilecyber.com"
           JENKINS_JOB: "PETAPP_SANITY"
           JENKINS_USER: "agilecyber"
-          JENKINS_TOKEN: "1186ccab74ae46177ea02c605d794768e6"
+          JENKINS_TOKEN: "119b94eea1e127cc9fd3cae9ac2fb094cd"
+          JENKINS_ENV: "JENKINS_ENV"
+          
         run: |
           CRUMB=$(curl -s -u "${JENKINS_USER}:${JENKINS_TOKEN}" "${JENKINS_URL}/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,\":\",//crumb)")
           curl -v -X POST "${JENKINS_URL}/job/${JENKINS_JOB}/build" \
